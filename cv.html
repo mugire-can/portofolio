@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mugire CAN - Cybersecurity CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0d1b2a;
+            --secondary: #1e3a5f;
+            --accent: #00d4ff;
+            --success: #2ed573;
+            --danger: #ff4757;
+            --light: #f0f0f0;
+            --text: #e0e0e0;
+            --text-dark: #b0b0b0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, #0a0e27 0%, #1a2847 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(13, 27, 42, 0.95);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 40px;
+            border-bottom: 3px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .name {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .title {
+            font-size: 1.6em;
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+
+        .contact-item-icon {
+            color: var(--accent);
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .contact-item-text {
+            color: var(--text-dark);
+            word-break: break-word;
+        }
+
+        /* Main Content */
+        .content {
+            padding: 40px;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            font-size: 1.2em;
+        }
+
+        /* Professional Summary */
+        .summary-text {
+            color: var(--text-dark);
+            line-height: 1.8;
+            background: rgba(0, 212, 255, 0.05);
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+        }
+
+        /* Experience & Education */
+        .entry {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 3px solid var(--accent);
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .entry:hover {
+            background: rgba(0, 212, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 8px;
+            gap: 15px;
+        }
+
+        .entry-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .entry-subtitle {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .entry-date {
+            color: var(--text-dark);
+            font-size: 0.9em;
+            white-space: nowrap;
+            background: rgba(46, 213, 115, 0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .entry-location {
+            color: var(--text-dark);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .entry-description {
+            color: var(--text-dark);
+            font-size: 0.95em;
+        }
+
+        .entry-description ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        .entry-description li {
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-category {
+            background: rgba(0, 212, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .skill-category-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            font-size: 1em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Certifications */
+        .cert-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .cert-item {
+            background: rgba(46, 213, 115, 0.1);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            background: rgba(46, 213, 115, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(46, 213, 115, 0.2);
+        }
+
+        .cert-name {
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 4px;
+        }
+
+        .cert-provider {
+            color: var(--text-dark);
+            font-size: 0.9em;
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(46, 213, 115, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .project-title {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .project-description {
+            color: var(--text-dark);
+            font-size: 0.9em;
+            margin-bottom: 12px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tech-badge {
+            background: rgba(0, 212, 255, 0.15);
+            color: var(--accent);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            border: 1px solid var(--accent);
+        }
+
+        /* Languages */
+        .language-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .language-name {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .language-level {
+            color: var(--success);
+            font-size: 0.9em;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            padding: 20px 40px;
+            border-top: 2px solid var(--accent);
+            text-align: center;
+            color: var(--text-dark);
+            font-size: 0.9em;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+                border: none;
+                box-shadow: none;
+                background: white;
+                color: #333;
+            }
+
+            .name,
+            .section-title,
+            .entry-title,
+            .skill-category-title,
+            .cert-name,
+            .project-title {
+                color: #0d1b2a;
+            }
+
+            .accent,
+            .entry-subtitle,
+            .skill-tag,
+            .tech-badge {
+                color: #00d4ff;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                border: none;
+                border-radius: 0;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+
+            .title {
+                font-size: 1.2em;
+            }
+
+            .entry-header {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="name">MUGIRE CAN</div>
+                <div class="title">🛡️ Cybersecurity Specialist</div>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📧</span>
+                        <span class="contact-item-text">mugire@email.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📱</span>
+                        <span class="contact-item-text">+1 (XXX) XXX-XXXX</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">📍</span>
+                        <span class="contact-item-text">Your City, Country</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">🔗</span>
+                        <span class="contact-item-text">github.com/mugire-can</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-item-icon">💼</span>
+                        <span class="contact-item-text">linkedin.com/in/mugire</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Professional Summary -->
+            <section class="section">
+                <div class="section-title">
+                    <span class="section-icon">👤</span>
+                    Professional Summary
+                </div>
+                <div class="summary-text">
+                    Cybersecurity specialist with strong expertise in threat detection, penetration testing, and vulnerability management. Passionate about protecting digital assets and building secure systems. Proven track record in implementing security solutions, conducting security assessments, and responding to incidents. Seeking to leverage technical proficiency and strategic mindset to lead cybersecurity initiatives in an organization.
+                </div>
+            </section>
+
+            <!-- Professional Experience -->
+            <section class="section">
+                <div class="section-title">
+                    <span class="section-icon">💼</span>
+                    Professional Experience
+                </div>
+
+                <div class="entry">
+                    <div class="entry-header">
+                        <div>
+                            <div class="entry-title">Cybersecurity Analyst</div>
+                            <div class="entry-subtitle">Tech Security Inc.</div>
+                        </div>
+                        <div class="entry-date">2024 - Present</div>
+                    </div>
+                    <div class="entry-location">📍 Remote</div>
+                    <div class="entry-description">
+                        <ul>
+                            <li>Monitor and respond to security incidents with 40% faster response time</li>
+                            <li>Conduct vulnerability assessments across enterprise infrastructure</li>
+                            <li>Implement and manage SIEM solutions for real-time threat detection</li>
+                            <li>Develop and maintain security policies and procedures</li>
+                            <li>Train team members on cybersecurity best practices</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-header">
+                        <div>
+                            <div class="entry-title">Junior Security Engineer</div>
+                            <div class="entry-subtitle">Digital Defense Corp.</div>
+                        </div>
+                        <div class="entry-date">2023 - 2024</div>
+                    </div>
+                    <div class="entry-location">📍 City, Country</div>
+                    <div class="entry-description">
+                        <ul>
+                            <li>Identified and remediated 50+ security vulnerabilities</li>
+                            <li>Assisted in penetration testing activities</li>
+                            <li>Maintained security configurations and logs</li>
+                            <li>Collaborated with incident response team on security events</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education -->
+            <section class="section">
+                <div class="section-title">
+                    <span class="section-icon">🎓</span>
+                    Education
+                </div>
+
+                <div class="entry">
+                    <div class="entry-header">
+                        <div>
+                            <div class="entry-title">Bachelor of Science in Cybersecurity</div>
+                            <div class="entry-subtitle">University of Technology</div>
+                        </div>
+                        <div class="entry-date">2024</div>
+                    </div>
+                    <div class="entry-description">
+                        Focus: Network Security, Cryptography, Ethical Hacking, Security Architecture
+                    </div>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-header">
+                        <div>
+                            <div class="entry-title">High School Diploma</div>
+                            <div class="entry-subtitle">Central High School</div>
+                        </div>
+                        <div class="entry-date">2020</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills -->
+            <section class="section">
+                <div class="section-title">
+                    <span class="section-icon">🔧</span>
+                    Core Competencies
+                </div>
+
+                <div class="skills-container">
+                    <div class="skill-category">
+                        <div class="skill-category-title">Threat Detection</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">SIEM (Splunk)</span>
+                            <span class="skill-tag">IDS/IPS</span>
+                            <span class="skill-tag">Log Analysis</span>
+                            <span class="skill-tag">Incident Response</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Penetration Testing</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Web Apps</span>
+                            <span class="skill-tag">Network Testing</span>
+                            <span class="skill-tag">Social Engineering</span>
+                            <span class="skill-tag">Metasploit</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Security Infrastructure</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Firewalls</span>
+                            <span class="skill-tag">Cloud Security</span>
+                            <span class="skill-tag">Network Architecture</span>
+                            <span class="skill-tag">Zero Trust</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Technical Skills</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Bash</span>
+                            <span class="skill-tag">Linux</span>
+                            <span class="skill-tag">Windows Admin</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Vulnerability Management</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Nessus</span>
+                            <span class="skill-tag">OpenVAS</span>
+                            <span class="skill-tag">Risk Assessment</span>
+                            <span class="skill-tag">Patch Management</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-category-title">Compliance & Governance</div>
+                        <div class="skill-tags">
+                            <span class="skill-tag">GDPR</span>
+                            <span class="skill-tag">HIPAA</span>
+                            <span class="skill-tag">PCI-DSS</span>
+                            <span class="skill-tag">ISO 27001</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Certifications -->
+            <section class="section">
+                <div class="section-title">
+                    <span class="section-icon">📜</span>
+                    Certifications & Credentials
+                </div>
+
+                <div class="cert-list">
+                    <div class="cert-item">
+                        <div class="cert-name">CompTIA Security+</div>
+                        <div class="cert-provider">CompTIA | 2024</div>
+                    </div>
+
+                    <div class="cert-item">
+                        <div class="cert-name">Certified Ethical Hacker (CEH)</div>
+                        <div class="cert-provider">EC-Council | 2024</div>
+                    </div>
+
+                    <div class="cert-item">
+                        <div class="cert-name">Linux Professional Institute (LPIC-1)</div>
+                        <div class="cert-provider">LPI | 2024</div>
+                    </div>
+
+                    <div class="cert-item">
+                        <div class="cert-name">GIAC Security Essentials (GSEC)</div>
+                        <div class="cert-provider">GIAC | 2024</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Projects -->
+            <section class="section">
+                <div class="section-title">
+                    <span class="section-icon">🚀</span>
+                    Notable Projects
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-title">Malware Analysis Lab</div>
+                        <div class="project-description">
+                            Developed isolated environment for analyzing malware behavior and reverse engineering binaries.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-badge">Reverse Engineering</span>
+                            <span class="tech-badge">IDA Pro</span>
+                            <span class="tech-badge">Wireshark</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Security Automation Framework</div>
+                        <div class="project-description">
+                            Created Python scripts to automate vulnerability scanning and threat intelligence gathering.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">Automation</span>
+                            <span class="tech-badge">SIEM</span>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-title">Network Intrusion Detection</div>
+                        <div class="project-description">
+                            Deployed and configured IDS/IPS systems with custom detection rules.
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-badge">Snort</span>
+                            <span class="tech-badge">Suricata</span>
+                            <span class="tech-badge">Network Security</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Languages -->
+            <section class="section">
+                <div class="section-title">
+                    <span class="section-icon">🌐</span>
+                    Languages
+                </div>
+
+                <div class="language-list">
+                    <div class="language-item">
+                        <span class="language-name">English</span>
+                        <span class="language-level">Fluent</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="language-name">French</span>
+                        <span class="language-level">Intermediate</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>For more information and interactive portfolio, visit: <strong>github.com/mugire-can/portofolio</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth printing functionality
+        window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'p') {
+                window.print();
+            }
+        });
+
+        console.log('%c📄 Modern CV Loaded', 'color: #00d4ff; font-size: 16px; font-weight: bold;');
+        console.log('%cTip: Press Ctrl+P to print or save as PDF', 'color: #2ed573; font-size: 12px;');
+    </script>
+</body>
+</html>
