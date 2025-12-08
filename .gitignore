@@ -1,0 +1,18 @@
+# OneDrive cloud files
+*.tmp
+*.lnk
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Dependencies
+node_modules/
+
+# Images (optional - can cause OneDrive conflicts)
+# Uncomment if you want to skip images folder
+# images/
