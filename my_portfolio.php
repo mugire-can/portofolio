@@ -1,11 +1,48 @@
+<?php
+// Portfolio Contact Form Handler
+session_start();
+
+$form_submitted = false;
+$form_message = "";
+$form_error = false;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get form data
+    $name = htmlspecialchars(trim($_POST['name'] ?? ''));
+    $surname = htmlspecialchars(trim($_POST['surname'] ?? ''));
+    $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
+    $subject = htmlspecialchars(trim($_POST['subject'] ?? ''));
+    $message = htmlspecialchars(trim($_POST['message'] ?? ''));
+    
+    // Validation
+    if (empty($name) || empty($surname) || empty($email) || empty($subject) || empty($message)) {
+        $form_error = true;
+        $form_message = "⚠️ All fields are required!";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $form_error = true;
+        $form_message = "⚠️ Invalid email format!";
+    } else {
+        // Process the form (you can add email sending, database storage, etc.)
+        $form_submitted = true;
+        $form_message = "✅ Thank you, {$name}! Your message has been received. We'll get back to you soon.";
+        
+        // Log submission
+        $log_entry = date('Y-m-d H:i:s') . " | {$name} {$surname} | {$email} | {$subject}\n";
+        file_put_contents('submissions.log', $log_entry, FILE_APPEND);
+        
+        // Clear form data after success
+        $name = $surname = $email = $subject = $message = "";
+    }
+}
+?>
 <!Doctype html>
 <html lang="en"> 
 <head>
-    <link rel="stylesheet" href="my_portfolio.css">
+    <link rel="stylesheet" href="assets/css/my_portfolio.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cybersecurity Portfolio | Mugire CAN</title>
-    <script src="my_portofolio.js"></script>
+    <script src="assets/js/my_portofolio.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -184,26 +221,34 @@
     <section id="contact">
         <h2>📬 Get In Touch</h2>
         <p style="color: #b0b0b0; margin-bottom: 20px;">Have a question or want to collaborate? Reach out to me!</p>
-        <form action="#" method="post" class="contact-form">
+        
+        <!-- Display Form Message -->
+        <?php if ($form_submitted || $form_error): ?>
+            <div style="padding: 15px; margin-bottom: 20px; border-radius: 5px; text-align: center; <?php echo $form_error ? 'background: rgba(255, 71, 87, 0.2); color: #ff4757;' : 'background: rgba(46, 213, 115, 0.2); color: #2ed573;'; ?>">
+                <?php echo $form_message; ?>
+            </div>
+        <?php endif; ?>
+        
+        <form action="" method="post" class="contact-form">
             <div class="form-row">
                 <div class="form-group">
                     <label for="name">First Name:</label>
-                    <input type="text" id="name" name="name" required placeholder="Your first name">
+                    <input type="text" id="name" name="name" required placeholder="Your first name" value="<?php echo htmlspecialchars($name ?? ''); ?>">
                 </div>
                 <div class="form-group">
                     <label for="surname">Last Name:</label>
-                    <input type="text" id="surname" name="surname" required placeholder="Your last name">
+                    <input type="text" id="surname" name="surname" required placeholder="Your last name" value="<?php echo htmlspecialchars($surname ?? ''); ?>">
                 </div>
             </div>
 
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            <input type="email" id="email" name="email" required placeholder="your.email@example.com" value="<?php echo htmlspecialchars($email ?? ''); ?>">
 
             <label for="subject">Subject:</label>
-            <input type="text" id="subject" name="subject" required placeholder="What is this about?">
+            <input type="text" id="subject" name="subject" required placeholder="What is this about?" value="<?php echo htmlspecialchars($subject ?? ''); ?>">
 
             <label for="message">Message:</label>
-            <textarea id="message" name="message" rows="5" required placeholder="Tell me more about your inquiry..."></textarea>
+            <textarea id="message" name="message" rows="5" required placeholder="Tell me more about your inquiry..."><?php echo htmlspecialchars($message ?? ''); ?></textarea>
 
             <button type="submit">Send Message</button>
         </form>
