@@ -22,12 +22,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $form_error = true;
         $form_message = "⚠️ Invalid email format!";
     } else {
-        // Process the form (you can add email sending, database storage, etc.)
+        // Portfolio owner email
+        $portfolio_email = "mugirecan@gmail.com";
+        
+        // Process the form - Send email to portfolio owner
         $form_submitted = true;
         $form_message = "✅ Thank you, {$name}! Your message has been received. We'll get back to you soon.";
         
+        // Prepare email headers
+        $headers = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=UTF-8\r\n";
+        $headers .= "From: {$email}\r\n";
+        $headers .= "Reply-To: {$email}\r\n";
+        
+        // Prepare email body
+        $email_body = "
+        <html>
+        <head>
+            <style>
+                body { font-family: Arial, sans-serif; color: #333; }
+                .container { max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f5f5f5; border-radius: 5px; }
+                .header { background-color: #0d1b2a; color: #00d4ff; padding: 20px; border-radius: 5px; text-align: center; }
+                .content { background-color: white; padding: 20px; margin-top: 10px; border-radius: 5px; }
+                .field { margin: 15px 0; }
+                .label { font-weight: bold; color: #0d1b2a; }
+                .footer { margin-top: 20px; font-size: 12px; color: #666; text-align: center; }
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <div class='header'>
+                    <h2>🛡️ New Portfolio Contact Form Submission</h2>
+                </div>
+                <div class='content'>
+                    <div class='field'>
+                        <span class='label'>From:</span><br>
+                        {$name} {$surname}
+                    </div>
+                    <div class='field'>
+                        <span class='label'>Email:</span><br>
+                        <a href='mailto:{$email}'>{$email}</a>
+                    </div>
+                    <div class='field'>
+                        <span class='label'>Subject:</span><br>
+                        {$subject}
+                    </div>
+                    <div class='field'>
+                        <span class='label'>Message:</span><br>
+                        <p>" . nl2br($message) . "</p>
+                    </div>
+                </div>
+                <div class='footer'>
+                    <p>This email was sent from your portfolio contact form.</p>
+                    <p>Submitted on: " . date('Y-m-d H:i:s') . "</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        ";
+        
+        // Send email
+        $mail_sent = mail($portfolio_email, "New Portfolio Submission: {$subject}", $email_body, $headers);
+        
         // Log submission
-        $log_entry = date('Y-m-d H:i:s') . " | {$name} {$surname} | {$email} | {$subject}\n";
+        $log_entry = date('Y-m-d H:i:s') . " | {$name} {$surname} | {$email} | {$subject} | Email: " . ($mail_sent ? "Sent" : "Failed") . "\n";
         file_put_contents('submissions.log', $log_entry, FILE_APPEND);
         
         // Clear form data after success
