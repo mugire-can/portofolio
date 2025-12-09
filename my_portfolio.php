@@ -247,7 +247,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <h4>Cybersecurity Analyst</h4>
-                            <p class="role-company">Your Company • 2024 - Present</p>
+                            <p class="role-company">Current Position • 2024 - Present</p>
                             <p class="role-description">Monitoring and responding to security incidents, performing vulnerability assessments, and implementing security best practices.</p>
                             <ul class="achievements">
                                 <li>Reduced incident response time by 40%</li>
@@ -266,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <h4>Bachelor's in Cybersecurity</h4>
-                            <p class="role-company">Your University • 2024</p>
+                            <p class="role-company">University • 2024</p>
                             <p class="role-description">Focus on network security, cryptography, and ethical hacking</p>
                         </div>
                     </div>

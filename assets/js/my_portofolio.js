@@ -9,9 +9,9 @@ const portfolioData = {
     lastName: "CAN",
     title: "Cybersecurity Specialist",
     tagline: "Defending the Digital Frontier",
-    email: "mugire@email.com", // Update with your email
-    phone: "+1 (XXX) XXX-XXXX", // Update with your phone
-    location: "Your Location", // Update your location
+    email: "mugirecan@gmail.com",
+    phone: "+1 (XXX) XXX-XXXX",
+    location: "Your Location",
     cvFile: "Mugire CAN CV.pdf"
   },
 
@@ -107,11 +107,10 @@ const portfolioData = {
   ],
 
   experience: [
-    // Add your work experience here
     {
       id: 1,
       role: "Cybersecurity Analyst",
-      company: "Your Company",
+      company: "Current Position",
       duration: "2024 - Present",
       description: "Monitoring and responding to security incidents, performing vulnerability assessments, and implementing security best practices.",
       achievements: [
@@ -123,11 +122,10 @@ const portfolioData = {
   ],
 
   education: [
-    // Add your educational background
     {
       id: 1,
       degree: "Bachelor's in Cybersecurity",
-      institution: "Your University",
+      institution: "University",
       year: 2024,
       details: "Focus on network security, cryptography, and ethical hacking"
     }

@@ -1,8 +1,7 @@
 # 🛡️ Cybersecurity Portfolio
 
-A modern, responsive portfolio website showcasing cybersecurity expertise, projects, certifications, and experience. Built with HTML, CSS, JavaScript, and PHP with dynamic form handling.
+A modern, responsive portfolio website showcasing cybersecurity expertise, projects, certifications, and experience. Built with HTML, CSS, JavaScript, and PHP with dynamic form handling and email notifications.
 
-**Live Demo**: [View Portfolio](https://yourportfolio.com) *(update with your domain)*
 
 ---
 
@@ -410,27 +409,7 @@ Potential improvements:
 
 **Last Updated**: December 9, 2025  
 **Status**: ✅ Production Ready  
-**Version**: 1.0
+**Version**: 1.0  
+**Author**: Mugire CAN  
+**Email**: mugirecan@gmail.com
 
----
-
-## 🙏 Acknowledgments
-
-Built with modern web standards and best practices. Inspired by cybersecurity professionals showcasing their expertise.
-
----
-
-## 📚 Resources
-
-- [PHP Documentation](https://www.php.net/docs.php)
-- [CSS Best Practices](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [Web Security](https://owasp.org/)
-
----
-
-## 🎉 Ready to Deploy!
-
-Your portfolio is production-ready. Customize it with your information and deploy to your server.
-
-**Happy coding!** 🚀
