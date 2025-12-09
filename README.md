@@ -10,9 +10,9 @@ A modern, responsive portfolio website showcasing cybersecurity expertise, proje
 
 - 🎨 **Responsive Design** - Works on desktop, tablet, and mobile devices
 - 📱 **Modern UI** - Cybersecurity-themed dark blue gradient design
-- 🔐 **Dynamic Contact Form** - Server-side validation and submission logging
+- 🔐 **Dynamic Contact Form** - Server-side validation and automatic email notifications
+- 📧 **Email Notifications** - Submissions sent to mugirecan@gmail.com
 - 📥 **CV Download** - One-click CV download functionality
-- 📧 **Email Integration** - Copy email to clipboard with one click
 - 🔒 **Security Features** - XSS protection, input sanitization, email validation
 - 📊 **Project Showcase** - Display featured projects with technologies
 - 📜 **Certifications** - List all professional certifications
@@ -79,8 +79,9 @@ portofolio/
 The contact form includes:
 - **Server-side validation** - All fields required
 - **Email format checking** - Valid email format required
+- **Email notifications** - Automatically sends beautiful HTML emails to mugirecan@gmail.com
 - **XSS protection** - Input sanitization with htmlspecialchars()
-- **Automatic logging** - Submissions saved to `submissions.log`
+- **Automatic logging** - Submissions saved to `submissions.log` with email status
 - **User feedback** - Success/error messages displayed
 - **Form persistence** - Data retained on validation errors
 
@@ -88,7 +89,8 @@ The contact form includes:
 1. Fill all fields (First Name, Last Name, Email, Subject, Message)
 2. Click "Send Message"
 3. See success message
-4. Check `submissions.log` for entry
+4. Check your email inbox (mugirecan@gmail.com) for the formatted submission
+5. Check `submissions.log` for entry with email send status
 
 ### Portfolio Sections
 
@@ -271,15 +273,37 @@ The portfolio is optimized for:
 
 ---
 
-## 📧 Email Notifications (Optional)
+## 📧 Email Notifications
 
-To add email notifications on form submission, add to `my_portfolio.php` after line 31:
+Email notifications are **already implemented** and fully functional!
 
+### How It Works:
+1. When someone submits the contact form, an email is automatically sent to **mugirecan@gmail.com**
+2. The email includes a beautifully formatted HTML template with:
+   - Sender's name and email
+   - Subject line
+   - Full message content
+   - Submission timestamp
+   - Professional cybersecurity-themed styling
+
+### Email Configuration:
+The portfolio email is configured in `my_portfolio.php` at line 27:
 ```php
-// Send email notification
-mail("your@email.com", "New Portfolio Submission", 
-     "From: $email\n\nMessage:\n$message");
+$portfolio_email = "mugirecan@gmail.com";
 ```
+
+To change the email address, simply update this line:
+```php
+$portfolio_email = "your-email@example.com";
+```
+
+### Email Features:
+- ✅ HTML-formatted emails
+- ✅ Automatic reply-to header set to sender's email
+- ✅ Professional styling with cybersecurity theme colors
+- ✅ Line breaks preserved in message content
+- ✅ Timestamp included in email
+- ✅ Email status logged (Sent/Failed) in submissions.log
 
 ---
 
