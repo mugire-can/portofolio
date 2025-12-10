@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Cyber Hacker Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 50%, #2a5c8f 100%);
+            font-family: 'Courier New', monospace;
+            color: #00d4ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: rgba(13, 27, 42, 0.95);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            animation: glowBorder 3s ease-in-out infinite;
+        }
+
+        @keyframes glowBorder {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(0, 212, 255, 0.6), inset 0 0 30px rgba(0, 212, 255, 0.2);
+            }
+        }
+
+        .terminal-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #00d4ff;
+            padding-bottom: 20px;
+        }
+
+        .terminal-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        }
+
+        .terminal-header p {
+            color: #2ed573;
+            font-size: 0.9em;
+        }
+
+        .game-display {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00d4ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            min-height: 150px;
+        }
+
+        .terminal-text {
+            margin-bottom: 15px;
+            animation: typewriter 0.5s steps(40, end);
+        }
+
+        @keyframes typewriter {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .status-line {
+            color: #2ed573;
+            margin: 10px 0;
+            font-size: 0.9em;
+        }
+
+        .attempts {
+            color: #ff4757;
+            font-weight: bold;
+        }
+
+        .success {
+            color: #2ed573;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #ff4757;
+            font-weight: bold;
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .hints-section {
+            background: rgba(46, 213, 115, 0.1);
+            border-left: 4px solid #2ed573;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .hints-section h3 {
+            color: #2ed573;
+            margin-bottom: 10px;
+            font-size: 0.95em;
+        }
+
+        .hint-item {
+            color: #b0b0b0;
+            font-size: 0.85em;
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .hint-item:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #2ed573;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .input-section label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .input-section input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00d4ff;
+            border-radius: 5px;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .input-section input:focus {
+            outline: none;
+            border-color: #2ed573;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .input-section input::placeholder {
+            color: #666;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(135deg, #00d4ff, #2ed573);
+            color: #0d1b2a;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        button:hover:not(:disabled) {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .reset-btn {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 1px solid #00d4ff;
+        }
+
+        .reset-btn:hover {
+            background: rgba(0, 212, 255, 0.3);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #00d4ff;
+        }
+
+        .stat-box {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2ed573;
+        }
+
+        .game-over {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 71, 87, 0.1);
+            border: 2px solid #ff4757;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .game-won {
+            text-align: center;
+            padding: 20px;
+            background: rgba(46, 213, 115, 0.1);
+            border: 2px solid #2ed573;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(46, 213, 115, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(46, 213, 115, 0.6);
+            }
+        }
+
+        .game-won h2 {
+            color: #2ed573;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 25px;
+            }
+
+            .terminal-header h1 {
+                font-size: 1.5em;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="terminal-header">
+            <h1>🎮 CYBER HACKER</h1>
+            <p>> System Access Terminal v1.0</p>
+        </div>
+
+        <div class="game-display" id="gameDisplay">
+            <div class="terminal-text">
+                > Initializing secure access point...
+            </div>
+            <div class="terminal-text">
+                > Connection established ✓
+            </div>
+            <div class="terminal-text status-line">
+                > AUTHORIZATION REQUIRED
+            </div>
+        </div>
+
+        <div class="hints-section" id="hintsSection">
+            <h3>💡 Hints:</h3>
+            <div class="hint-item" id="hint1">Hint will appear here</div>
+            <div class="hint-item" id="hint2">Hint will appear here</div>
+            <div class="hint-item" id="hint3">Hint will appear here</div>
+        </div>
+
+        <div class="input-section">
+            <label for="passwordInput">> Enter Password:</label>
+            <input 
+                type="password" 
+                id="passwordInput" 
+                placeholder="Type password here..." 
+                onkeypress="handleEnter(event)"
+            >
+        </div>
+
+        <div class="button-group">
+            <button onclick="checkPassword()">🔓 Guess Password</button>
+            <button class="reset-btn" onclick="resetGame()">🔄 Reset Game</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <div class="stat-label">Attempts Left</div>
+                <div class="stat-value" id="attemptsDisplay">3</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-label">Score</div>
+                <div class="stat-value" id="scoreDisplay">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game Data
+        const passwords = [
+            {
+                password: "CyberSecurity2024",
+                hints: [
+                    "It contains the word 'Cyber'",
+                    "Length: 18 characters",
+                    "Contains uppercase letters and numbers"
+                ]
+            },
+            {
+                password: "H4cker@Defense",
+                hints: [
+                    "Starts with 'H'",
+                    "Contains special character @",
+                    "Length: 14 characters"
+                ]
+            },
+            {
+                password: "Encryption123Secure",
+                hints: [
+                    "Contains the word 'Encryption'",
+                    "Length: 19 characters",
+                    "Ends with 'Secure'"
+                ]
+            },
+            {
+                password: "Malware0Detected",
+                hints: [
+                    "Contains the word 'Malware'",
+                    "Has a number 0 in it",
+                    "Length: 16 characters"
+                ]
+            },
+            {
+                password: "NetworkVPN#Safe",
+                hints: [
+                    "Related to network security",
+                    "Contains # symbol",
+                    "Length: 15 characters"
+                ]
+            }
+        ];
+
+        let currentPassword = {};
+        let attempts = 3;
+        let score = 0;
+        let gameActive = true;
+
+        // Initialize game
+        function initGame() {
+            currentPassword = passwords[Math.floor(Math.random() * passwords.length)];
+            attempts = 3;
+            gameActive = true;
+            document.getElementById('passwordInput').disabled = false;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+            updateDisplay();
+            displayHints();
+        }
+
+        // Display hints
+        function displayHints() {
+            document.getElementById('hint1').textContent = "✓ " + currentPassword.hints[0];
+            document.getElementById('hint2').textContent = "✓ " + currentPassword.hints[1];
+            document.getElementById('hint3').textContent = "✓ " + currentPassword.hints[2];
+        }
+
+        // Update display
+        function updateDisplay() {
+            document.getElementById('attemptsDisplay').textContent = attempts;
+            document.getElementById('scoreDisplay').textContent = score;
+        }
+
+        // Check password
+        function checkPassword() {
+            if (!gameActive) return;
+
+            const input = document.getElementById('passwordInput').value;
+            const gameDisplay = document.getElementById('gameDisplay');
+
+            if (!input) {
+                showError('Please enter a password!');
+                return;
+            }
+
+            if (input === currentPassword.password) {
+                // WIN!
+                score += (attempts * 50);
+                gameActive = false;
+                document.getElementById('passwordInput').disabled = true;
+
+                gameDisplay.innerHTML = `
+                    <div class="game-won">
+                        <h2>✅ ACCESS GRANTED!</h2>
+                        <p>Password: <span class="success">${input}</span></p>
+                        <p style="color: #2ed573; margin-top: 10px;">You earned <span class="success">${attempts * 50} points!</span></p>
+                    </div>
+                    <div class="terminal-text">
+                        > System fully compromised ✓
+                    </div>
+                    <div class="terminal-text success">
+                        > Authorization successful
+                    </div>
+                `;
+
+                updateDisplay();
+                return;
+            }
+
+            // Wrong password
+            attempts--;
+            score = Math.max(0, score - 10);
+            updateDisplay();
+
+            if (attempts > 0) {
+                showError(`❌ Wrong password! ${attempts} attempt${attempts === 1 ? '' : 's'} remaining`);
+                document.getElementById('passwordInput').value = '';
+            } else {
+                // Game Over
+                gameActive = false;
+                document.getElementById('passwordInput').disabled = true;
+
+                gameDisplay.innerHTML = `
+                    <div class="game-over">
+                        <h2>❌ ACCESS DENIED</h2>
+                        <p>System locked after 3 failed attempts</p>
+                        <p style="color: #ff4757; margin-top: 10px;">Correct password was: <span class="error">${currentPassword.password}</span></p>
+                    </div>
+                    <div class="terminal-text error">
+                        > Too many failed login attempts
+                    </div>
+                    <div class="terminal-text error">
+                        > System in lockdown mode
+                    </div>
+                `;
+            }
+        }
+
+        // Show error message
+        function showError(message) {
+            const gameDisplay = document.getElementById('gameDisplay');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'terminal-text error';
+            errorDiv.textContent = '> ' + message;
+            gameDisplay.appendChild(errorDiv);
+            gameDisplay.scrollTop = gameDisplay.scrollHeight;
+        }
+
+        // Reset game
+        function resetGame() {
+            document.getElementById('gameDisplay').innerHTML = `
+                <div class="terminal-text">
+                    > Resetting system...
+                </div>
+                <div class="terminal-text">
+                    > Connection reestablished ✓
+                </div>
+                <div class="terminal-text status-line">
+                    > AUTHORIZATION REQUIRED
+                </div>
+            `;
+            initGame();
+        }
+
+        // Handle Enter key
+        function handleEnter(event) {
+            if (event.key === 'Enter' && gameActive) {
+                checkPassword();
+            }
+        }
+
+        // Start game
+        initGame();
+    </script>
+</body>
+</html>

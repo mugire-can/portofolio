@@ -119,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <li><a href="#expertise">Expertise</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#certifications">Certifications</a></li>
+                <li><a href="cyber_hacker_game.html" target="_blank">🎮 Game</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
