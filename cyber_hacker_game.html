@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎮 Cyber Hacker Game v2.1</title>
+    <title>🎮 Cyber Hacker Game</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
         body {
             background: linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 50%, #2a5c8f 100%);
             font-family: 'Courier New', monospace;
@@ -14,26 +13,9 @@
             min-height: 100vh;
             padding: 20px;
         }
-
-        .container { max-width: 1100px; margin: 0 auto; }
-        
-        .header { 
-            text-align: center; 
-            margin-bottom: 30px; 
-            animation: fadeInDown 0.6s ease;
-        }
-        
-        .header h1 {
-            font-size: 2.5em;
-            text-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-            margin-bottom: 10px;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 2.5em; text-shadow: 0 0 20px rgba(0, 212, 255, 0.8); margin-bottom: 10px; }
         .auth-bar {
             background: rgba(13, 27, 42, 0.95);
             border: 2px solid #00d4ff;
@@ -45,12 +27,7 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
         }
-
-        .auth-left { display: flex; gap: 10px; flex-wrap: wrap; }
-        .auth-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-
         .btn {
             padding: 10px 15px;
             background: linear-gradient(135deg, #00d4ff, #2ed573);
@@ -61,34 +38,20 @@
             font-weight: bold;
             font-family: 'Courier New', monospace;
             transition: all 0.3s ease;
-            font-size: 0.9em;
         }
-
-        .btn:hover { box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); transform: translateY(-2px); }
-        .btn:active { transform: translateY(0); }
-
+        .btn:hover { box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
         .btn-secondary {
             background: rgba(0, 212, 255, 0.2);
             color: #00d4ff;
             border: 1px solid #00d4ff;
         }
-
         .btn-secondary:hover { background: rgba(0, 212, 255, 0.3); }
-
-        .user-greeting { color: #2ed573; font-weight: bold; font-size: 0.95em; }
-
+        .user-greeting { color: #2ed573; font-weight: bold; }
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            animation: fadeInUp 0.6s ease;
         }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         .panel {
             background: rgba(13, 27, 42, 0.95);
             border: 2px solid #00d4ff;
@@ -96,16 +59,13 @@
             padding: 25px;
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
         }
-
         .panel-title {
             font-size: 1.3em;
             color: #00d4ff;
             margin-bottom: 20px;
             padding-bottom: 15px;
             border-bottom: 2px solid #00d4ff;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
         }
-
         .game-display {
             background: rgba(0, 0, 0, 0.8);
             border: 1px solid #00d4ff;
@@ -115,15 +75,11 @@
             min-height: 120px;
             max-height: 200px;
             overflow-y: auto;
-            font-size: 0.9em;
-            line-height: 1.6;
         }
-
         .game-display p { margin-bottom: 8px; }
         .game-display .success { color: #2ed573; }
         .game-display .error { color: #ff4757; }
         .game-display .info { color: #2ed573; }
-
         .hints-box {
             background: rgba(46, 213, 115, 0.1);
             border-left: 4px solid #2ed573;
@@ -131,22 +87,17 @@
             margin-bottom: 15px;
             border-radius: 3px;
         }
-
-        .hints-box h4 { color: #2ed573; margin-bottom: 8px; font-size: 0.95em; }
+        .hints-box h4 { color: #2ed573; margin-bottom: 8px; }
         .hint { color: #b0b0b0; font-size: 0.85em; margin: 4px 0 4px 20px; }
-
         .form-group {
             margin-bottom: 12px;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 5px;
             color: #00d4ff;
             font-weight: bold;
-            font-size: 0.9em;
         }
-
         .form-group input {
             width: 100%;
             padding: 10px;
@@ -155,22 +106,29 @@
             border-radius: 5px;
             color: #00d4ff;
             font-family: 'Courier New', monospace;
-            font-size: 0.9em;
         }
-
         .form-group input:focus {
             outline: none;
             border-color: #2ed573;
             box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
-
+        .input-group {
+            display: flex;
+            gap: 5px;
+        }
+        .input-group input {
+            flex: 1;
+        }
+        .input-group button {
+            padding: 10px 12px;
+            font-size: 0.9em;
+        }
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-bottom: 15px;
         }
-
         .stat-box {
             background: rgba(0, 212, 255, 0.1);
             border: 1px solid #00d4ff;
@@ -178,10 +136,8 @@
             border-radius: 5px;
             text-align: center;
         }
-
         .stat-label { color: #b0b0b0; font-size: 0.8em; margin-bottom: 5px; }
         .stat-value { font-size: 1.5em; color: #2ed573; font-weight: bold; }
-
         .modal {
             display: none;
             position: fixed;
@@ -192,9 +148,7 @@
             justify-content: center;
             align-items: center;
         }
-
         .modal.active { display: flex; }
-
         .modal-content {
             background: rgba(13, 27, 42, 0.98);
             border: 2px solid #00d4ff;
@@ -202,42 +156,34 @@
             padding: 30px;
             max-width: 400px;
             width: 90%;
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
         }
-
         .modal-header {
             font-size: 1.5em;
             color: #00d4ff;
             margin-bottom: 20px;
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
         }
-
         .modal-buttons {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-
         .modal-buttons button { flex: 1; padding: 10px; }
-
         .message {
             padding: 12px;
             border-radius: 5px;
             margin-bottom: 12px;
             font-size: 0.9em;
         }
-
         .message.success { background: rgba(46, 213, 115, 0.2); color: #2ed573; border-left: 4px solid #2ed573; }
         .message.error { background: rgba(255, 71, 87, 0.2); color: #ff4757; border-left: 4px solid #ff4757; }
         .message.info { background: rgba(0, 212, 255, 0.2); color: #00d4ff; border-left: 4px solid #00d4ff; }
-
         .tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
             border-bottom: 2px solid #00d4ff;
         }
-
         .tab {
             padding: 10px 15px;
             background: transparent;
@@ -246,69 +192,57 @@
             cursor: pointer;
             font-family: 'Courier New', monospace;
             border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
         }
-
         .tab.active { color: #00d4ff; border-bottom-color: #00d4ff; }
         .tab:hover { color: #00d4ff; }
-
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
         .leaderboard-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 15px;
             font-size: 0.85em;
         }
-
         .leaderboard-table th, .leaderboard-table td {
             padding: 10px;
             text-align: left;
             border-bottom: 1px solid #00d4ff;
             color: #b0b0b0;
         }
-
         .leaderboard-table th {
             background: rgba(0, 212, 255, 0.1);
             color: #00d4ff;
             font-weight: bold;
         }
-
         .leaderboard-table tr:hover { background: rgba(0, 212, 255, 0.05); }
         .leaderboard-table .rank { color: #2ed573; font-weight: bold; width: 40px; }
-
         .hidden { display: none !important; }
-
-        .loading {
-            color: #2ed573;
-            text-align: center;
-            padding: 20px;
+        .loading { color: #2ed573; text-align: center; padding: 20px; }
+        #notificationArea {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 2000;
+            max-width: 400px;
         }
-
         @media (max-width: 900px) {
             .main-content { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8em; }
-            .auth-bar { flex-direction: column; align-items: flex-start; }
-            .auth-right { justify-content: space-between; width: 100%; }
         }
-
-        .scrollable { max-height: 300px; overflow-y: auto; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🎮 CYBER HACKER TERMINAL</h1>
-            <p>>> Game v2.1 - Secure Access Challenge</p>
+            <p>>> Game v3.0 - Secure Access Challenge</p>
         </div>
 
         <div class="auth-bar">
-            <div class="auth-left" id="authButtons">
+            <div id="authButtons" style="display: flex; gap: 10px;">
                 <button class="btn" onclick="openLoginModal()">🔓 LOGIN</button>
                 <button class="btn btn-secondary" onclick="openRegisterModal()">📝 REGISTER</button>
             </div>
-            <div class="auth-right" id="userSection" style="display:none;">
+            <div id="userSection" style="display: none; display: flex; gap: 10px; align-items: center;">
                 <span class="user-greeting" id="userDisplay"></span>
                 <button class="btn btn-secondary" onclick="logoutUser()">🚪 LOGOUT</button>
             </div>
@@ -320,35 +254,29 @@
             <!-- GAME PANEL -->
             <div class="panel">
                 <div class="panel-title">🎮 GAME TERMINAL</div>
-                
-                <div id="gamePanel">
+                <div id="gamePanel" class="hidden">
                     <div class="game-display" id="gameDisplay">
-                        <p>> Initializing secure access...</p>
-                        <p class="success">> Connection established ✓</p>
-                        <p class="info">> AUTHORIZATION REQUIRED</p>
+                        <p>> Initializing...</p>
+                        <p class="success">> Ready ✓</p>
                     </div>
-
                     <div class="hints-box">
-                        <h4>💡 PASSWORD HINTS:</h4>
+                        <h4>💡 HINTS:</h4>
                         <div class="hint" id="hint1">Loading...</div>
                         <div class="hint" id="hint2">Loading...</div>
                         <div class="hint" id="hint3">Loading...</div>
                     </div>
-
                     <div class="form-group">
                         <label>Enter Password:</label>
                         <input type="password" id="passwordInput" placeholder="Type here..." onkeypress="if(event.key==='Enter')checkPassword()">
                     </div>
-
                     <div style="display: flex; gap: 10px;">
                         <button class="btn" style="flex:1;" onclick="checkPassword()">🔓 GUESS</button>
-                        <button class="btn btn-secondary" style="flex:1;" onclick="resetGame()">🔄 NEW GAME</button>
+                        <button class="btn btn-secondary" style="flex:1;" onclick="resetGame()">🔄 NEW</button>
                     </div>
-
                     <div class="stats-grid">
                         <div class="stat-box">
                             <div class="stat-label">Attempts</div>
-                            <div class="stat-value" id="attemptsDisplay">0</div>
+                            <div class="stat-value" id="attemptsDisplay">3</div>
                         </div>
                         <div class="stat-box">
                             <div class="stat-label">Score</div>
@@ -356,37 +284,29 @@
                         </div>
                     </div>
                 </div>
-
-                <div id="loginPrompt" class="message info hidden">
-                    ℹ️ Please LOGIN or REGISTER to play and save scores
+                <div id="loginPrompt" class="message info">
+                    ℹ️ LOGIN or REGISTER to play
                 </div>
             </div>
 
-            <!-- STATS/LEADERBOARD PANEL -->
+            <!-- STATS PANEL -->
             <div class="panel">
                 <div class="panel-title">📊 STATS & RANKINGS</div>
-
                 <div class="tabs">
-                    <button class="tab active" onclick="switchStatsTab('mystats')">📈 My Stats</button>
-                    <button class="tab" onclick="switchStatsTab('leaderboard')">🏆 Leaderboard</button>
+                    <button class="tab active" onclick="switchTab('mystats')">📈 My Stats</button>
+                    <button class="tab" onclick="switchTab('leaderboard')">🏆 Board</button>
                 </div>
-
-                <!-- My Stats Tab -->
-                <div id="mystats" class="tab-content active scrollable">
-                    <div id="statsContent" class="message info">
-                        ℹ️ Login to view your statistics
-                    </div>
+                <div id="mystats" class="tab-content active" style="max-height: 400px; overflow-y: auto;">
+                    <div id="statsContent" class="message info">Login to view stats</div>
                 </div>
-
-                <!-- Leaderboard Tab -->
-                <div id="leaderboard" class="tab-content scrollable">
-                    <div style="display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;">
+                <div id="leaderboard" class="tab-content" style="max-height: 400px; overflow-y: auto;">
+                    <div style="display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap;">
                         <button class="btn btn-secondary" onclick="loadLeaderboard('all')" style="padding: 8px 12px; font-size: 0.85em;">ALL</button>
                         <button class="btn btn-secondary" onclick="loadLeaderboard('month')" style="padding: 8px 12px; font-size: 0.85em;">MONTH</button>
                         <button class="btn btn-secondary" onclick="loadLeaderboard('week')" style="padding: 8px 12px; font-size: 0.85em;">WEEK</button>
                         <button class="btn btn-secondary" onclick="loadLeaderboard('today')" style="padding: 8px 12px; font-size: 0.85em;">TODAY</button>
                     </div>
-                    <div id="leaderboardContent" class="loading">Loading leaderboard...</div>
+                    <div id="leaderboardContent" class="loading">Loading...</div>
                 </div>
             </div>
         </div>
@@ -402,7 +322,10 @@
             </div>
             <div class="form-group">
                 <label>Password:</label>
-                <input type="password" id="loginPass" placeholder="Enter password">
+                <div class="input-group">
+                    <input type="password" id="loginPass" placeholder="Enter password">
+                    <button type="button" class="btn btn-secondary" onclick="togglePassword('loginPass')">👁️</button>
+                </div>
             </div>
             <div id="loginError"></div>
             <div class="modal-buttons">
@@ -422,11 +345,17 @@
             </div>
             <div class="form-group">
                 <label>Password (6+ chars):</label>
-                <input type="password" id="regPass" placeholder="Enter password">
+                <div class="input-group">
+                    <input type="password" id="regPass" placeholder="Enter password">
+                    <button type="button" class="btn btn-secondary" onclick="togglePassword('regPass')">👁️</button>
+                </div>
             </div>
             <div class="form-group">
                 <label>Confirm Password:</label>
-                <input type="password" id="regPassConfirm" placeholder="Confirm password">
+                <div class="input-group">
+                    <input type="password" id="regPassConfirm" placeholder="Confirm password">
+                    <button type="button" class="btn btn-secondary" onclick="togglePassword('regPassConfirm')">👁️</button>
+                </div>
             </div>
             <div id="registerError"></div>
             <div class="modal-buttons">
@@ -437,13 +366,12 @@
     </div>
 
     <script>
-        // GAME CONFIG
         const PASSWORDS = [
-            { pwd: "CyberSecurity2024", hints: ["Contains 'Cyber'", "18 characters", "Has uppercase & numbers"] },
-            { pwd: "H4cker@Defense", hints: ["Starts with 'H'", "Has @ symbol", "14 characters"] },
-            { pwd: "Encryption123Secure", hints: ["Contains 'Encryption'", "19 characters", "Ends with 'Secure'"] },
-            { pwd: "Malware0Detected", hints: ["Contains 'Malware'", "Has number 0", "16 characters"] },
-            { pwd: "NetworkVPN#Safe", hints: ["Network security related", "Has # symbol", "15 characters"] }
+            { pwd: "CyberSecurity2024", hints: ["Contains 'Cyber'", "18 chars", "Upper + numbers"] },
+            { pwd: "H4cker@Defense", hints: ["Starts with 'H'", "Has @", "14 chars"] },
+            { pwd: "Encryption123Secure", hints: ["Has 'Encryption'", "19 chars", "Ends 'Secure'"] },
+            { pwd: "Malware0Detected", hints: ["Has 'Malware'", "Has 0", "16 chars"] },
+            { pwd: "NetworkVPN#Safe", hints: ["Network security", "Has #", "15 chars"] }
         ];
 
         let gameState = {
@@ -456,15 +384,21 @@
         };
 
         // NOTIFICATIONS
-        function notify(message, type = 'info') {
-            const notif = document.createElement('div');
-            notif.className = `message ${type}`;
-            notif.textContent = message;
-            document.getElementById('notificationArea').appendChild(notif);
-            setTimeout(() => notif.remove(), 4000);
+        function notify(msg, type = 'info') {
+            const el = document.createElement('div');
+            el.className = `message ${type}`;
+            el.textContent = msg;
+            document.getElementById('notificationArea').appendChild(el);
+            setTimeout(() => el.remove(), 4000);
         }
 
-        // AUTH FUNCTIONS
+        // PASSWORD VISIBILITY
+        function togglePassword(id) {
+            const el = document.getElementById(id);
+            el.type = el.type === 'password' ? 'text' : 'password';
+        }
+
+        // AUTH
         function checkAuth() {
             fetch('game_database.php', {
                 method: 'POST',
@@ -472,30 +406,28 @@
                 body: 'action=current_user'
             })
             .then(r => r.json())
-            .then(data => {
-                gameState.user = data.user;
+            .then(d => {
+                gameState.user = d.user;
                 updateUI();
             })
-            .catch(err => {
-                console.error('Auth check error:', err);
-                notify('Connection error - try refreshing', 'error');
-            });
+            .catch(e => notify('Connection error', 'error'));
         }
 
         function updateUI() {
             if (gameState.user) {
                 document.getElementById('authButtons').style.display = 'none';
                 document.getElementById('userSection').style.display = 'flex';
-                document.getElementById('userDisplay').textContent = `Welcome, ${gameState.user.username}! 👾`;
+                document.getElementById('userDisplay').textContent = `${gameState.user.username}`;
+                document.getElementById('gamePanel').classList.remove('hidden');
                 document.getElementById('loginPrompt').classList.add('hidden');
-                document.getElementById('gamePanel').style.display = 'block';
                 initGame();
                 loadUserStats();
+                loadLeaderboard('all');
             } else {
                 document.getElementById('authButtons').style.display = 'flex';
                 document.getElementById('userSection').style.display = 'none';
+                document.getElementById('gamePanel').classList.add('hidden');
                 document.getElementById('loginPrompt').classList.remove('hidden');
-                document.getElementById('gamePanel').style.display = 'none';
             }
         }
 
@@ -504,7 +436,6 @@
             document.getElementById('loginModal').classList.remove('active');
             document.getElementById('loginError').innerHTML = '';
         }
-
         function openRegisterModal() { document.getElementById('registerModal').classList.add('active'); }
         function closeRegisterModal() { 
             document.getElementById('registerModal').classList.remove('active');
@@ -512,10 +443,10 @@
         }
 
         function submitLogin() {
-            const username = document.getElementById('loginUser').value.trim();
-            const password = document.getElementById('loginPass').value.trim();
-
-            if (!username || !password) {
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPass').value.trim();
+            
+            if (!user || !pass) {
                 document.getElementById('loginError').innerHTML = '<div class="message error">❌ All fields required</div>';
                 return;
             }
@@ -523,67 +454,64 @@
             fetch('game_database.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+                body: `action=login&username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`
             })
             .then(r => r.json())
-            .then(data => {
-                if (data.success) {
+            .then(d => {
+                if (d.success) {
                     closeLoginModal();
-                    notify('✅ Login successful!', 'success');
                     checkAuth();
+                    notify('✅ Logged in!', 'success');
                 } else {
-                    document.getElementById('loginError').innerHTML = `<div class="message error">❌ ${data.message}</div>`;
+                    document.getElementById('loginError').innerHTML = `<div class="message error">❌ ${d.message}</div>`;
                 }
             })
-            .catch(err => {
-                document.getElementById('loginError').innerHTML = '<div class="message error">❌ Connection error</div>';
+            .catch(e => {
+                document.getElementById('loginError').innerHTML = '<div class="message error">❌ Error</div>';
             });
         }
 
         function submitRegister() {
-            const username = document.getElementById('regUser').value.trim();
-            const password = document.getElementById('regPass').value.trim();
-            const confirm = document.getElementById('regPassConfirm').value.trim();
+            const user = document.getElementById('regUser').value.trim();
+            const pass = document.getElementById('regPass').value.trim();
+            const conf = document.getElementById('regPassConfirm').value.trim();
 
-            if (!username || !password || !confirm) {
+            if (!user || !pass || !conf) {
                 document.getElementById('registerError').innerHTML = '<div class="message error">❌ All fields required</div>';
                 return;
             }
-
-            if (username.length < 3) {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Username must be 3+ chars</div>';
+            if (user.length < 3) {
+                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Username 3+ chars</div>';
                 return;
             }
-
-            if (password.length < 6) {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Password must be 6+ chars</div>';
+            if (pass.length < 6) {
+                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Password 6+ chars</div>';
                 return;
             }
-
-            if (password !== confirm) {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Passwords do not match</div>';
+            if (pass !== conf) {
+                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Passwords mismatch</div>';
                 return;
             }
 
             fetch('game_database.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `action=register&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+                body: `action=register&username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`
             })
             .then(r => r.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('registerError').innerHTML = '<div class="message success">✅ Registered! Please login.</div>';
+            .then(d => {
+                if (d.success) {
+                    document.getElementById('registerError').innerHTML = '<div class="message success">✅ Registered! Login now.</div>';
                     setTimeout(() => {
                         closeRegisterModal();
                         openLoginModal();
                     }, 1500);
                 } else {
-                    document.getElementById('registerError').innerHTML = `<div class="message error">❌ ${data.message}</div>`;
+                    document.getElementById('registerError').innerHTML = `<div class="message error">❌ ${d.message}</div>`;
                 }
             })
-            .catch(err => {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Connection error</div>';
+            .catch(e => {
+                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Error</div>';
             });
         }
 
@@ -594,14 +522,14 @@
                 body: 'action=logout'
             })
             .then(r => r.json())
-            .then(data => {
+            .then(d => {
                 gameState.user = null;
                 updateUI();
                 notify('✅ Logged out', 'success');
             });
         }
 
-        // GAME FUNCTIONS
+        // GAME
         function initGame() {
             if (!gameState.user) return;
             gameState.currentPassword = PASSWORDS[Math.floor(Math.random() * PASSWORDS.length)];
@@ -614,7 +542,7 @@
             document.getElementById('passwordInput').focus();
             updateDisplay();
             showHints();
-            clearGameDisplay();
+            document.getElementById('gameDisplay').innerHTML = `<p>> Ready for password input...</p>`;
         }
 
         function showHints() {
@@ -628,56 +556,39 @@
             document.getElementById('scoreDisplay').textContent = gameState.score;
         }
 
-        function clearGameDisplay() {
-            document.getElementById('gameDisplay').innerHTML = `
-                <p>> System ready...</p>
-                <p class="success">> Awaiting password input ✓</p>
-            `;
-        }
-
         function checkPassword() {
-            if (!gameState.gameActive) {
-                notify('⚠️ Game not active. Start a new game.', 'error');
-                return;
-            }
-
+            if (!gameState.gameActive) return;
             const input = document.getElementById('passwordInput').value;
-            if (!input) {
-                notify('⚠️ Enter a password', 'error');
-                return;
-            }
-
+            if (!input) { notify('⚠️ Enter password', 'error'); return; }
+            
             const display = document.getElementById('gameDisplay');
-
+            
             if (input === gameState.currentPassword.pwd) {
-                const timeTaken = Math.floor((Date.now() - gameState.startTime) / 1000);
+                const time = Math.floor((Date.now() - gameState.startTime) / 1000);
                 gameState.score += (gameState.attempts * 50);
                 gameState.gameActive = false;
                 document.getElementById('passwordInput').disabled = true;
-
+                
                 display.innerHTML = `
-                    <p class="success">✅ ACCESS GRANTED!</p>
+                    <p class="success">✅ CORRECT!</p>
                     <p class="success">> Password: ${input}</p>
-                    <p class="info">> Time: ${timeTaken}s</p>
-                    <p class="success">> Points earned: ${gameState.attempts * 50}</p>
+                    <p class="info">> Time: ${time}s</p>
+                    <p class="success">> +${gameState.attempts * 50} points!</p>
                 `;
 
-                // Save score
                 fetch('game_database.php', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `action=save_score&score=${gameState.score}&password=${input}&attempts=${3-gameState.attempts}&time=${timeTaken}`
+                    body: `action=save_score&score=${gameState.score}&password=${input}&attempts=${3-gameState.attempts}&time=${time}`
                 })
                 .then(r => r.json())
-                .then(data => {
-                    if (data.success) {
+                .then(d => {
+                    if (d.success) {
                         notify('✅ Score saved!', 'success');
                         loadUserStats();
                         loadLeaderboard('all');
                     }
-                })
-                .catch(err => notify('⚠️ Score save error', 'error'));
-
+                });
                 updateDisplay();
                 return;
             }
@@ -687,113 +598,84 @@
             updateDisplay();
 
             if (gameState.attempts > 0) {
-                display.innerHTML += `<p class="error">❌ Wrong password! ${gameState.attempts} attempts left</p>`;
+                display.innerHTML += `<p class="error">❌ Wrong! ${gameState.attempts} left</p>`;
                 document.getElementById('passwordInput').value = '';
                 document.getElementById('passwordInput').focus();
             } else {
                 gameState.gameActive = false;
                 document.getElementById('passwordInput').disabled = true;
                 display.innerHTML = `
-                    <p class="error">❌ ACCESS DENIED</p>
-                    <p class="error">> Too many failed attempts</p>
-                    <p class="info">> Correct password: ${gameState.currentPassword.pwd}</p>
+                    <p class="error">❌ FAILED</p>
+                    <p class="info">> Answer: ${gameState.currentPassword.pwd}</p>
                 `;
             }
         }
 
         function resetGame() {
-            if (!gameState.user) {
-                notify('⚠️ Login required', 'error');
-                return;
-            }
+            if (!gameState.user) { notify('⚠️ Login required', 'error'); return; }
             initGame();
-            notify('🔄 Game reset', 'success');
+            notify('🔄 New game started!', 'success');
         }
 
-        // STATS & LEADERBOARD
+        // STATS
         function loadUserStats() {
             if (!gameState.user) return;
-
             fetch('game_database.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `action=get_user_stats&user_id=${gameState.user.id}`
             })
             .then(r => r.json())
-            .then(stats => {
-                if (!stats) return;
+            .then(s => {
+                if (!s) return;
                 let html = `
                     <div class="stats-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;">
-                        <div class="stat-box">
-                            <div class="stat-label">Played</div>
-                            <div class="stat-value">${stats.games_played || 0}</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-label">Total</div>
-                            <div class="stat-value">${stats.total_score || 0}</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-label">Best</div>
-                            <div class="stat-value">${stats.best_score || 0}</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-label">Avg</div>
-                            <div class="stat-value">${stats.average_score || 0}</div>
-                        </div>
+                        <div class="stat-box"><div class="stat-label">Played</div><div class="stat-value">${s.games_played || 0}</div></div>
+                        <div class="stat-box"><div class="stat-label">Total</div><div class="stat-value">${s.total_score || 0}</div></div>
+                        <div class="stat-box"><div class="stat-label">Best</div><div class="stat-value">${s.best_score || 0}</div></div>
+                        <div class="stat-box"><div class="stat-label">Avg</div><div class="stat-value">${s.average_score || 0}</div></div>
                     </div>
                 `;
-
-                if (stats.recent_games && stats.recent_games.length > 0) {
-                    html += '<h4 style="color: #00d4ff; margin-top: 15px; margin-bottom: 10px;">Recent Games:</h4>';
+                if (s.recent_games && s.recent_games.length > 0) {
+                    html += '<h3 style="color: #00d4ff; margin-top: 15px; margin-bottom: 10px; font-size: 0.95em;">Recent:</h3>';
                     html += '<table class="leaderboard-table"><tr><th>Date</th><th>Score</th><th>Time</th></tr>';
-                    stats.recent_games.forEach(g => {
-                        const date = new Date(g.date).toLocaleString();
-                        html += `<tr><td>${date}</td><td>${g.score}</td><td>${g.time_taken}s</td></tr>`;
+                    s.recent_games.forEach(g => {
+                        html += `<tr><td>${new Date(g.date).toLocaleDateString()}</td><td>${g.score}</td><td>${g.time_taken}s</td></tr>`;
                     });
                     html += '</table>';
                 }
-
                 document.getElementById('statsContent').innerHTML = html;
-            })
-            .catch(err => {
-                document.getElementById('statsContent').innerHTML = '<div class="message error">❌ Error loading stats</div>';
             });
         }
 
-        function loadLeaderboard(period = 'all') {
+        function loadLeaderboard(p = 'all') {
             document.getElementById('leaderboardContent').innerHTML = '<div class="loading">Loading...</div>';
-
             fetch('game_database.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `action=get_leaderboard&period=${period}&limit=20`
+                body: `action=get_leaderboard&period=${p}&limit=20`
             })
             .then(r => r.json())
-            .then(data => {
-                if (!data.leaderboard || data.leaderboard.length === 0) {
-                    document.getElementById('leaderboardContent').innerHTML = '<div class="message info">ℹ️ No scores yet</div>';
+            .then(d => {
+                if (!d.leaderboard || d.leaderboard.length === 0) {
+                    document.getElementById('leaderboardContent').innerHTML = '<div class="message info">No scores yet</div>';
                     return;
                 }
-
                 let html = '<table class="leaderboard-table"><tr><th class="rank">#</th><th>Player</th><th>Score</th><th>Games</th><th>Best</th></tr>';
-                data.leaderboard.forEach((p, i) => {
+                d.leaderboard.forEach((p, i) => {
                     html += `<tr><td class="rank">${i+1}</td><td>${p.username}</td><td>${p.total_score}</td><td>${p.games_played}</td><td>${p.best_score}</td></tr>`;
                 });
                 html += '</table>';
                 document.getElementById('leaderboardContent').innerHTML = html;
-            })
-            .catch(err => {
-                document.getElementById('leaderboardContent').innerHTML = '<div class="message error">❌ Error loading leaderboard</div>';
             });
         }
 
-        function switchStatsTab(tab) {
+        function switchTab(t) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            document.getElementById(tab).classList.add('active');
+            document.getElementById(t).classList.add('active');
             event.target.classList.add('active');
-            
-            if (tab === 'leaderboard') loadLeaderboard('all');
+            if (t === 'leaderboard') loadLeaderboard('all');
         }
 
         // INIT
