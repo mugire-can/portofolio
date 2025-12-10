@@ -2,62 +2,225 @@
 // Game Database Handler
 session_start();
 
-// Database configuration
+// Use simple JSON file in project directory
 $db_file = __DIR__ . '/game_scores.json';
-$db_dir = __DIR__;
 
-// Ensure directory is writable
-if (!is_writable($db_dir)) {
-    chmod($db_dir, 0755);
-}
-
-// Initialize database if it doesn't exist
-if (!file_exists($db_file)) {
-    $initial_data = [
-        'users' => [],
-        'scores' => []
-    ];
-    file_put_contents($db_file, json_encode($initial_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    chmod($db_file, 0666);
-}
-
-// Read database with error handling
-function readDatabase() {
+// Initialize database
+function initDatabase() {
     global $db_file;
-    try {
-        if (!file_exists($db_file)) {
-            return ['users' => [], 'scores' => []];
-        }
-        $data = file_get_contents($db_file);
-        $decoded = json_decode($data, true);
-        if ($decoded === null) {
-            return ['users' => [], 'scores' => []];
-        }
-        return $decoded;
-    } catch (Exception $e) {
+    if (!file_exists($db_file)) {
+        $data = ['users' => [], 'scores' => []];
+        file_put_contents($db_file, json_encode($data, JSON_PRETTY_PRINT));
+    }
+}
+
+initDatabase();
+
+// Read database
+function getDatabase() {
+    global $db_file;
+    if (!file_exists($db_file)) {
         return ['users' => [], 'scores' => []];
     }
+    $content = @file_get_contents($db_file);
+    if ($content === false) return ['users' => [], 'scores' => []];
+    $data = @json_decode($content, true);
+    return ($data === null) ? ['users' => [], 'scores' => []] : $data;
 }
 
-// Write database with error handling
-function writeDatabase($data) {
+// Save database
+function saveDatabase($data) {
     global $db_file;
-    try {
-        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        if ($json === false) {
-            throw new Exception('JSON encoding failed');
-        }
-        $result = file_put_contents($db_file, $json, LOCK_EX);
-        if ($result === false) {
-            throw new Exception('Failed to write to database');
-        }
-        @chmod($db_file, 0666);
-        return true;
-    } catch (Exception $e) {
-        error_log('Database write error: ' . $e->getMessage());
-        return false;
-    }
+    @file_put_contents($db_file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 }
+
+// Register
+if ($_POST['action'] === 'register') {
+    $user = trim($_POST['username'] ?? '');
+    $pass = $_POST['password'] ?? '';
+    
+    if (strlen($user) < 3 || strlen($pass) < 6) {
+        echo json_encode(['success' => false, 'message' => 'Invalid input']);
+        exit;
+    }
+    
+    $db = getDatabase();
+    foreach ($db['users'] as $u) {
+        if ($u['username'] === $user) {
+            echo json_encode(['success' => false, 'message' => 'User exists']);
+            exit;
+        }
+    }
+    
+    $db['users'][] = [
+        'id' => uniqid('user_'),
+        'username' => $user,
+        'password' => password_hash($pass, PASSWORD_DEFAULT),
+        'created' => date('Y-m-d H:i:s'),
+        'total_score' => 0,
+        'games_played' => 0
+    ];
+    
+    saveDatabase($db);
+    echo json_encode(['success' => true, 'message' => 'Registered']);
+    exit;
+}
+
+// Login
+if ($_POST['action'] === 'login') {
+    $user = trim($_POST['username'] ?? '');
+    $pass = $_POST['password'] ?? '';
+    
+    $db = getDatabase();
+    foreach ($db['users'] as $u) {
+        if ($u['username'] === $user && password_verify($pass, $u['password'])) {
+            $_SESSION['user_id'] = $u['id'];
+            $_SESSION['username'] = $u['username'];
+            echo json_encode(['success' => true, 'message' => 'Logged in']);
+            exit;
+        }
+    }
+    
+    echo json_encode(['success' => false, 'message' => 'Wrong credentials']);
+    exit;
+}
+
+// Current user
+if ($_POST['action'] === 'current_user') {
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['user' => null]);
+        exit;
+    }
+    
+    $db = getDatabase();
+    foreach ($db['users'] as $u) {
+        if ($u['id'] === $_SESSION['user_id']) {
+            echo json_encode(['user' => $u]);
+            exit;
+        }
+    }
+    
+    echo json_encode(['user' => null]);
+    exit;
+}
+
+// Save score
+if ($_POST['action'] === 'save_score') {
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false]);
+        exit;
+    }
+    
+    $db = getDatabase();
+    $score = (int)$_POST['score'];
+    $password = $_POST['password'] ?? '';
+    $attempts = (int)$_POST['attempts'];
+    $time = (int)$_POST['time'];
+    
+    $db['scores'][] = [
+        'user_id' => $_SESSION['user_id'],
+        'username' => $_SESSION['username'],
+        'score' => $score,
+        'password' => $password,
+        'attempts_used' => $attempts,
+        'time_taken' => $time,
+        'date' => date('Y-m-d H:i:s')
+    ];
+    
+    foreach ($db['users'] as &$u) {
+        if ($u['id'] === $_SESSION['user_id']) {
+            $u['total_score'] += $score;
+            $u['games_played']++;
+            break;
+        }
+    }
+    
+    saveDatabase($db);
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+// Get user stats
+if ($_POST['action'] === 'get_user_stats') {
+    $user_id = $_POST['user_id'] ?? '';
+    $db = getDatabase();
+    
+    $user = null;
+    foreach ($db['users'] as $u) {
+        if ($u['id'] === $user_id) {
+            $user = $u;
+            break;
+        }
+    }
+    
+    if (!$user) {
+        echo json_encode(null);
+        exit;
+    }
+    
+    $user_scores = array_filter($db['scores'], fn($s) => $s['user_id'] === $user_id);
+    
+    $stats = [
+        'user' => $user,
+        'total_score' => $user['total_score'],
+        'games_played' => $user['games_played'],
+        'best_score' => 0,
+        'average_score' => 0,
+        'recent_games' => []
+    ];
+    
+    if (!empty($user_scores)) {
+        $scores_arr = array_values($user_scores);
+        $stats['best_score'] = max(array_column($scores_arr, 'score'));
+        $stats['average_score'] = round(array_sum(array_column($scores_arr, 'score')) / count($scores_arr), 2);
+        usort($scores_arr, fn($a, $b) => strtotime($b['date']) - strtotime($a['date']));
+        $stats['recent_games'] = array_slice($scores_arr, 0, 10);
+    }
+    
+    echo json_encode($stats);
+    exit;
+}
+
+// Get leaderboard
+if ($_POST['action'] === 'get_leaderboard') {
+    $period = $_POST['period'] ?? 'all';
+    $limit = (int)($_POST['limit'] ?? 20);
+    
+    $db = getDatabase();
+    
+    $leaderboard = [];
+    foreach ($db['users'] as $user) {
+        $user_scores = array_filter($db['scores'], fn($s) => $s['user_id'] === $user['id']);
+        
+        if (!empty($user_scores)) {
+            $scores_arr = array_values($user_scores);
+            $best = max(array_column($scores_arr, 'score'));
+            $avg = round(array_sum(array_column($scores_arr, 'score')) / count($scores_arr), 2);
+            
+            $leaderboard[] = [
+                'username' => $user['username'],
+                'total_score' => $user['total_score'],
+                'games_played' => $user['games_played'],
+                'best_score' => $best,
+                'average_score' => $avg
+            ];
+        }
+    }
+    
+    usort($leaderboard, fn($a, $b) => $b['total_score'] - $a['total_score']);
+    echo json_encode(['leaderboard' => array_slice($leaderboard, 0, $limit)]);
+    exit;
+}
+
+// Logout
+if ($_POST['action'] === 'logout') {
+    session_destroy();
+    echo json_encode(['success' => true]);
+    exit;
+}
+
+echo json_encode(['success' => false, 'message' => 'Invalid action']);
+?>
 
 // Register user
 function registerUser($username, $password) {
