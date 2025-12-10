@@ -15,7 +15,7 @@
         }
         .container { max-width: 1200px; margin: 0 auto; }
         .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { font-size: 2.5em; text-shadow: 0 0 20px rgba(0, 212, 255, 0.8); margin-bottom: 10px; }
+        .header h1 { font-size: 2.5em; color: #00d4ff; text-shadow: 0 0 20px rgba(0, 212, 255, 0.8); }
         .auth-bar {
             background: rgba(13, 27, 42, 0.95);
             border: 2px solid #00d4ff;
@@ -25,8 +25,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
         }
         .btn {
             padding: 10px 15px;
@@ -37,17 +35,17 @@
             cursor: pointer;
             font-weight: bold;
             font-family: 'Courier New', monospace;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
-        .btn:hover { box-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
         .btn-secondary {
             background: rgba(0, 212, 255, 0.2);
             color: #00d4ff;
             border: 1px solid #00d4ff;
         }
         .btn-secondary:hover { background: rgba(0, 212, 255, 0.3); }
-        .user-greeting { color: #2ed573; font-weight: bold; }
-        .main-content {
+        .user-info { color: #2ed573; font-weight: bold; }
+        .content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
@@ -59,97 +57,46 @@
             padding: 25px;
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
         }
-        .panel-title {
-            font-size: 1.3em;
-            color: #00d4ff;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #00d4ff;
-        }
-        .game-display {
+        .panel h2 { color: #00d4ff; margin-bottom: 20px; border-bottom: 2px solid #00d4ff; padding-bottom: 10px; }
+        .game-output {
             background: rgba(0, 0, 0, 0.8);
             border: 1px solid #00d4ff;
             padding: 15px;
             margin-bottom: 15px;
             border-radius: 5px;
-            min-height: 120px;
-            max-height: 200px;
+            min-height: 100px;
+            max-height: 150px;
             overflow-y: auto;
+            line-height: 1.6;
         }
-        .game-display p { margin-bottom: 8px; }
-        .game-display .success { color: #2ed573; }
-        .game-display .error { color: #ff4757; }
-        .game-display .info { color: #2ed573; }
-        .hints-box {
-            background: rgba(46, 213, 115, 0.1);
-            border-left: 4px solid #2ed573;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 3px;
-        }
-        .hints-box h4 { color: #2ed573; margin-bottom: 8px; }
+        .game-output p { margin: 5px 0; }
+        .success { color: #2ed573; }
+        .error { color: #ff4757; }
+        .info { color: #b0b0b0; }
+        .hints { background: rgba(46, 213, 115, 0.1); border-left: 4px solid #2ed573; padding: 12px; margin-bottom: 15px; border-radius: 3px; }
+        .hints h4 { color: #2ed573; margin-bottom: 8px; }
         .hint { color: #b0b0b0; font-size: 0.85em; margin: 4px 0 4px 20px; }
-        .form-group {
-            margin-bottom: 12px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #00d4ff;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid #00d4ff;
-            border-radius: 5px;
-            color: #00d4ff;
-            font-family: 'Courier New', monospace;
-        }
-        .form-group input:focus {
-            outline: none;
-            border-color: #2ed573;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-        }
-        .input-group {
-            display: flex;
-            gap: 5px;
-        }
-        .input-group input {
-            flex: 1;
-        }
-        .input-group button {
-            padding: 10px 12px;
-            font-size: 0.9em;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        .stat-box {
-            background: rgba(0, 212, 255, 0.1);
-            border: 1px solid #00d4ff;
-            padding: 12px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .stat-label { color: #b0b0b0; font-size: 0.8em; margin-bottom: 5px; }
-        .stat-value { font-size: 1.5em; color: #2ed573; font-weight: bold; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; margin-bottom: 5px; color: #00d4ff; font-weight: bold; }
+        .input-row { display: flex; gap: 5px; align-items: center; }
+        .input-row input { flex: 1; padding: 10px; background: rgba(0, 0, 0, 0.8); border: 1px solid #00d4ff; border-radius: 5px; color: #00d4ff; font-family: monospace; }
+        .input-row button { padding: 10px 12px; font-size: 1em; }
+        .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .stat { background: rgba(0, 212, 255, 0.1); border: 1px solid #00d4ff; padding: 12px; border-radius: 5px; text-align: center; }
+        .stat-label { color: #b0b0b0; font-size: 0.8em; }
+        .stat-value { font-size: 1.8em; color: #2ed573; font-weight: bold; }
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 1000;
             justify-content: center;
             align-items: center;
         }
-        .modal.active { display: flex; }
-        .modal-content {
+        .modal.show { display: flex; }
+        .modal-box {
             background: rgba(13, 27, 42, 0.98);
             border: 2px solid #00d4ff;
             border-radius: 10px;
@@ -157,529 +104,445 @@
             max-width: 400px;
             width: 90%;
         }
-        .modal-header {
-            font-size: 1.5em;
-            color: #00d4ff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
-        }
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .modal-buttons button { flex: 1; padding: 10px; }
-        .message {
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 12px;
-            font-size: 0.9em;
-        }
-        .message.success { background: rgba(46, 213, 115, 0.2); color: #2ed573; border-left: 4px solid #2ed573; }
-        .message.error { background: rgba(255, 71, 87, 0.2); color: #ff4757; border-left: 4px solid #ff4757; }
-        .message.info { background: rgba(0, 212, 255, 0.2); color: #00d4ff; border-left: 4px solid #00d4ff; }
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #00d4ff;
-        }
-        .tab {
-            padding: 10px 15px;
-            background: transparent;
-            color: #b0b0b0;
-            border: none;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            border-bottom: 2px solid transparent;
-        }
-        .tab.active { color: #00d4ff; border-bottom-color: #00d4ff; }
-        .tab:hover { color: #00d4ff; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .leaderboard-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            font-size: 0.85em;
-        }
-        .leaderboard-table th, .leaderboard-table td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #00d4ff;
-            color: #b0b0b0;
-        }
-        .leaderboard-table th {
-            background: rgba(0, 212, 255, 0.1);
-            color: #00d4ff;
-            font-weight: bold;
-        }
-        .leaderboard-table tr:hover { background: rgba(0, 212, 255, 0.05); }
-        .leaderboard-table .rank { color: #2ed573; font-weight: bold; width: 40px; }
+        .modal-box h3 { color: #00d4ff; margin-bottom: 20px; font-size: 1.3em; }
+        .modal-box input { width: 100%; padding: 10px; margin-bottom: 10px; background: rgba(0, 0, 0, 0.8); border: 1px solid #00d4ff; border-radius: 5px; color: #00d4ff; font-family: monospace; }
+        .modal-buttons { display: flex; gap: 10px; margin-top: 20px; }
+        .modal-buttons button { flex: 1; padding: 10px; font-size: 0.9em; }
+        .msg { padding: 10px; border-radius: 5px; margin-bottom: 10px; }
+        .msg.success { background: rgba(46, 213, 115, 0.2); color: #2ed573; border-left: 4px solid #2ed573; }
+        .msg.error { background: rgba(255, 71, 87, 0.2); color: #ff4757; border-left: 4px solid #ff4757; }
         .hidden { display: none !important; }
-        .loading { color: #2ed573; text-align: center; padding: 20px; }
-        #notificationArea {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 2000;
-            max-width: 400px;
-        }
-        @media (max-width: 900px) {
-            .main-content { grid-template-columns: 1fr; }
-        }
+        .tabs { display: flex; gap: 10px; margin-bottom: 15px; border-bottom: 2px solid #00d4ff; }
+        .tab-btn { padding: 10px 15px; background: transparent; color: #b0b0b0; border: none; cursor: pointer; border-bottom: 2px solid transparent; font-family: monospace; }
+        .tab-btn.active { color: #00d4ff; border-bottom-color: #00d4ff; }
+        .tab-content { display: none; max-height: 350px; overflow-y: auto; }
+        .tab-content.active { display: block; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85em; margin-top: 10px; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #00d4ff; color: #b0b0b0; }
+        th { background: rgba(0, 212, 255, 0.1); color: #00d4ff; }
+        .rank { color: #2ed573; font-weight: bold; width: 40px; }
+        @media (max-width: 900px) { .content { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎮 CYBER HACKER TERMINAL</h1>
-            <p>>> Game v3.0 - Secure Access Challenge</p>
+            <h1>🎮 CYBER HACKER TERMINAL v3.1</h1>
+            <p>>> Password Guessing Challenge</p>
         </div>
 
+        <!-- AUTH BAR -->
         <div class="auth-bar">
-            <div id="authButtons" style="display: flex; gap: 10px;">
-                <button class="btn" onclick="openLoginModal()">🔓 LOGIN</button>
-                <button class="btn btn-secondary" onclick="openRegisterModal()">📝 REGISTER</button>
+            <div id="auth-buttons">
+                <button class="btn" onclick="showLoginModal()">🔓 LOGIN</button>
+                <button class="btn btn-secondary" onclick="showRegisterModal()">📝 REGISTER</button>
             </div>
-            <div id="userSection" style="display: none; display: flex; gap: 10px; align-items: center;">
-                <span class="user-greeting" id="userDisplay"></span>
-                <button class="btn btn-secondary" onclick="logoutUser()">🚪 LOGOUT</button>
+            <div id="user-info" class="hidden">
+                <span class="user-info" id="username-display"></span>
+                <button class="btn btn-secondary" onclick="logout()">🚪 LOGOUT</button>
             </div>
         </div>
 
-        <div id="notificationArea"></div>
-
-        <div class="main-content">
+        <!-- CONTENT -->
+        <div class="content">
             <!-- GAME PANEL -->
             <div class="panel">
-                <div class="panel-title">🎮 GAME TERMINAL</div>
-                <div id="gamePanel" class="hidden">
-                    <div class="game-display" id="gameDisplay">
-                        <p>> Initializing...</p>
-                        <p class="success">> Ready ✓</p>
+                <h2>🎮 GAME</h2>
+                <div id="game-area" class="hidden">
+                    <div class="game-output" id="game-output">
+                        <p class="info">> Initializing game...</p>
                     </div>
-                    <div class="hints-box">
+                    <div class="hints">
                         <h4>💡 HINTS:</h4>
-                        <div class="hint" id="hint1">Loading...</div>
-                        <div class="hint" id="hint2">Loading...</div>
-                        <div class="hint" id="hint3">Loading...</div>
+                        <div class="hint" id="hint1"></div>
+                        <div class="hint" id="hint2"></div>
+                        <div class="hint" id="hint3"></div>
                     </div>
                     <div class="form-group">
-                        <label>Enter Password:</label>
-                        <input type="password" id="passwordInput" placeholder="Type here..." onkeypress="if(event.key==='Enter')checkPassword()">
+                        <label>PASSWORD:</label>
+                        <div class="input-row">
+                            <input type="password" id="pwd-input" placeholder="Guess password..." onkeypress="if(event.key==='Enter') guessPassword()">
+                            <button class="btn btn-secondary" onclick="togglePwdView()">👁️</button>
+                        </div>
                     </div>
                     <div style="display: flex; gap: 10px;">
-                        <button class="btn" style="flex:1;" onclick="checkPassword()">🔓 GUESS</button>
-                        <button class="btn btn-secondary" style="flex:1;" onclick="resetGame()">🔄 NEW</button>
+                        <button class="btn" onclick="guessPassword()" style="flex: 1;">🔓 SUBMIT</button>
+                        <button class="btn btn-secondary" onclick="newGame()" style="flex: 1;">🔄 NEW</button>
                     </div>
-                    <div class="stats-grid">
-                        <div class="stat-box">
-                            <div class="stat-label">Attempts</div>
-                            <div class="stat-value" id="attemptsDisplay">3</div>
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-label">ATTEMPTS</div>
+                            <div class="stat-value" id="attempts">3</div>
                         </div>
-                        <div class="stat-box">
-                            <div class="stat-label">Score</div>
-                            <div class="stat-value" id="scoreDisplay">0</div>
+                        <div class="stat">
+                            <div class="stat-label">SCORE</div>
+                            <div class="stat-value" id="score">0</div>
                         </div>
                     </div>
                 </div>
-                <div id="loginPrompt" class="message info">
-                    ℹ️ LOGIN or REGISTER to play
+                <div id="login-prompt" class="msg info">
+                    ℹ️ Please login or register to play!
                 </div>
             </div>
 
             <!-- STATS PANEL -->
             <div class="panel">
-                <div class="panel-title">📊 STATS & RANKINGS</div>
+                <h2>📊 STATS</h2>
                 <div class="tabs">
-                    <button class="tab active" onclick="switchTab('mystats')">📈 My Stats</button>
-                    <button class="tab" onclick="switchTab('leaderboard')">🏆 Board</button>
+                    <button class="tab-btn active" onclick="switchTab('my-stats')">📈 MY STATS</button>
+                    <button class="tab-btn" onclick="switchTab('leaderboard')">🏆 LEADERBOARD</button>
                 </div>
-                <div id="mystats" class="tab-content active" style="max-height: 400px; overflow-y: auto;">
-                    <div id="statsContent" class="message info">Login to view stats</div>
+                
+                <div id="my-stats" class="tab-content active">
+                    <div id="stats-display" class="msg info">Login to see your stats</div>
                 </div>
-                <div id="leaderboard" class="tab-content" style="max-height: 400px; overflow-y: auto;">
+
+                <div id="leaderboard" class="tab-content">
                     <div style="display: flex; gap: 5px; margin-bottom: 10px; flex-wrap: wrap;">
                         <button class="btn btn-secondary" onclick="loadLeaderboard('all')" style="padding: 8px 12px; font-size: 0.85em;">ALL</button>
                         <button class="btn btn-secondary" onclick="loadLeaderboard('month')" style="padding: 8px 12px; font-size: 0.85em;">MONTH</button>
                         <button class="btn btn-secondary" onclick="loadLeaderboard('week')" style="padding: 8px 12px; font-size: 0.85em;">WEEK</button>
-                        <button class="btn btn-secondary" onclick="loadLeaderboard('today')" style="padding: 8px 12px; font-size: 0.85em;">TODAY</button>
                     </div>
-                    <div id="leaderboardContent" class="loading">Loading...</div>
+                    <div id="board-display" class="msg info">Loading leaderboard...</div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- LOGIN MODAL -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">> LOGIN</div>
-            <div class="form-group">
-                <label>Username:</label>
-                <input type="text" id="loginUser" placeholder="Enter username">
+    <div id="login-modal" class="modal">
+        <div class="modal-box">
+            <h3>> LOGIN</h3>
+            <input type="text" id="login-user" placeholder="Username">
+            <div class="input-row">
+                <input type="password" id="login-pass" placeholder="Password">
+                <button class="btn btn-secondary" onclick="toggleLogin()">👁️</button>
             </div>
-            <div class="form-group">
-                <label>Password:</label>
-                <div class="input-group">
-                    <input type="password" id="loginPass" placeholder="Enter password">
-                    <button type="button" class="btn btn-secondary" onclick="togglePassword('loginPass')">👁️</button>
-                </div>
-            </div>
-            <div id="loginError"></div>
+            <div id="login-error"></div>
             <div class="modal-buttons">
-                <button class="btn" onclick="submitLogin()">LOGIN</button>
-                <button class="btn btn-secondary" onclick="closeLoginModal()">CANCEL</button>
+                <button class="btn" onclick="doLogin()">LOGIN</button>
+                <button class="btn btn-secondary" onclick="closeModal('login-modal')">CANCEL</button>
             </div>
         </div>
     </div>
 
     <!-- REGISTER MODAL -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">> REGISTER</div>
-            <div class="form-group">
-                <label>Username (3+ chars):</label>
-                <input type="text" id="regUser" placeholder="Enter username">
+    <div id="register-modal" class="modal">
+        <div class="modal-box">
+            <h3>> REGISTER</h3>
+            <input type="text" id="reg-user" placeholder="Username (3+ chars)">
+            <div class="input-row">
+                <input type="password" id="reg-pass" placeholder="Password (6+ chars)">
+                <button class="btn btn-secondary" onclick="toggleRegister()">👁️</button>
             </div>
-            <div class="form-group">
-                <label>Password (6+ chars):</label>
-                <div class="input-group">
-                    <input type="password" id="regPass" placeholder="Enter password">
-                    <button type="button" class="btn btn-secondary" onclick="togglePassword('regPass')">👁️</button>
-                </div>
+            <div class="input-row">
+                <input type="password" id="reg-pass2" placeholder="Confirm password">
+                <button class="btn btn-secondary" onclick="toggleRegister2()">👁️</button>
             </div>
-            <div class="form-group">
-                <label>Confirm Password:</label>
-                <div class="input-group">
-                    <input type="password" id="regPassConfirm" placeholder="Confirm password">
-                    <button type="button" class="btn btn-secondary" onclick="togglePassword('regPassConfirm')">👁️</button>
-                </div>
-            </div>
-            <div id="registerError"></div>
+            <div id="register-error"></div>
             <div class="modal-buttons">
-                <button class="btn" onclick="submitRegister()">REGISTER</button>
-                <button class="btn btn-secondary" onclick="closeRegisterModal()">CANCEL</button>
+                <button class="btn" onclick="doRegister()">REGISTER</button>
+                <button class="btn btn-secondary" onclick="closeModal('register-modal')">CANCEL</button>
             </div>
         </div>
     </div>
 
     <script>
         const PASSWORDS = [
-            { pwd: "CyberSecurity2024", hints: ["Contains 'Cyber'", "18 chars", "Upper + numbers"] },
-            { pwd: "H4cker@Defense", hints: ["Starts with 'H'", "Has @", "14 chars"] },
-            { pwd: "Encryption123Secure", hints: ["Has 'Encryption'", "19 chars", "Ends 'Secure'"] },
-            { pwd: "Malware0Detected", hints: ["Has 'Malware'", "Has 0", "16 chars"] },
-            { pwd: "NetworkVPN#Safe", hints: ["Network security", "Has #", "15 chars"] }
+            { pwd: "CyberSecurity2024", hints: ["Contains 'Cyber'", "18 chars long", "Has uppercase & numbers"] },
+            { pwd: "H4cker@Defense", hints: ["Starts with H", "Has @ symbol", "14 characters"] },
+            { pwd: "Encryption123Secure", hints: ["Has 'Encryption'", "19 chars", "Ends with Secure"] },
+            { pwd: "Malware0Detected", hints: ["Has 'Malware'", "Has zero (0)", "16 chars"] },
+            { pwd: "NetworkVPN#Safe", hints: ["Network related", "Has # symbol", "15 chars"] }
         ];
 
-        let gameState = {
-            user: null,
-            currentPassword: null,
-            attempts: 3,
-            score: 0,
-            gameActive: false,
-            startTime: 0
-        };
+        let user = null;
+        let currentPwd = null;
+        let attempts = 3;
+        let score = 0;
+        let gameRunning = false;
 
-        // NOTIFICATIONS
-        function notify(msg, type = 'info') {
-            const el = document.createElement('div');
-            el.className = `message ${type}`;
-            el.textContent = msg;
-            document.getElementById('notificationArea').appendChild(el);
-            setTimeout(() => el.remove(), 4000);
+        // PASSWORD VISIBILITY TOGGLES
+        function toggleLogin() {
+            const el = document.getElementById('login-pass');
+            el.type = el.type === 'password' ? 'text' : 'password';
         }
-
-        // PASSWORD VISIBILITY
-        function togglePassword(id) {
-            const el = document.getElementById(id);
+        function toggleRegister() {
+            const el = document.getElementById('reg-pass');
+            el.type = el.type === 'password' ? 'text' : 'password';
+        }
+        function toggleRegister2() {
+            const el = document.getElementById('reg-pass2');
+            el.type = el.type === 'password' ? 'text' : 'password';
+        }
+        function togglePwdView() {
+            const el = document.getElementById('pwd-input');
             el.type = el.type === 'password' ? 'text' : 'password';
         }
 
+        // MODAL CONTROLS
+        function showLoginModal() { document.getElementById('login-modal').classList.add('show'); }
+        function showRegisterModal() { document.getElementById('register-modal').classList.add('show'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
         // AUTH
-        function checkAuth() {
+        function checkLogin() {
             fetch('game_database.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'action=current_user'
             })
             .then(r => r.json())
             .then(d => {
-                gameState.user = d.user;
+                user = d.user;
                 updateUI();
             })
-            .catch(e => notify('Connection error', 'error'));
+            .catch(e => console.error('Error:', e));
         }
 
         function updateUI() {
-            if (gameState.user) {
-                document.getElementById('authButtons').style.display = 'none';
-                document.getElementById('userSection').style.display = 'flex';
-                document.getElementById('userDisplay').textContent = `${gameState.user.username}`;
-                document.getElementById('gamePanel').classList.remove('hidden');
-                document.getElementById('loginPrompt').classList.add('hidden');
-                initGame();
-                loadUserStats();
+            if (user) {
+                document.getElementById('auth-buttons').classList.add('hidden');
+                document.getElementById('user-info').classList.remove('hidden');
+                document.getElementById('username-display').textContent = `👤 ${user.username}`;
+                document.getElementById('game-area').classList.remove('hidden');
+                document.getElementById('login-prompt').classList.add('hidden');
+                startNewGame();
+                loadStats();
                 loadLeaderboard('all');
             } else {
-                document.getElementById('authButtons').style.display = 'flex';
-                document.getElementById('userSection').style.display = 'none';
-                document.getElementById('gamePanel').classList.add('hidden');
-                document.getElementById('loginPrompt').classList.remove('hidden');
+                document.getElementById('auth-buttons').classList.remove('hidden');
+                document.getElementById('user-info').classList.add('hidden');
+                document.getElementById('game-area').classList.add('hidden');
+                document.getElementById('login-prompt').classList.remove('hidden');
             }
         }
 
-        function openLoginModal() { document.getElementById('loginModal').classList.add('active'); }
-        function closeLoginModal() { 
-            document.getElementById('loginModal').classList.remove('active');
-            document.getElementById('loginError').innerHTML = '';
-        }
-        function openRegisterModal() { document.getElementById('registerModal').classList.add('active'); }
-        function closeRegisterModal() { 
-            document.getElementById('registerModal').classList.remove('active');
-            document.getElementById('registerError').innerHTML = '';
-        }
-
-        function submitLogin() {
-            const user = document.getElementById('loginUser').value.trim();
-            const pass = document.getElementById('loginPass').value.trim();
-            
-            if (!user || !pass) {
-                document.getElementById('loginError').innerHTML = '<div class="message error">❌ All fields required</div>';
+        function doLogin() {
+            const u = document.getElementById('login-user').value.trim();
+            const p = document.getElementById('login-pass').value.trim();
+            if (!u || !p) {
+                document.getElementById('login-error').innerHTML = '<div class="msg error">❌ All fields required</div>';
                 return;
             }
-
             fetch('game_database.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `action=login&username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`
+                body: `action=login&username=${encodeURIComponent(u)}&password=${encodeURIComponent(p)}`
             })
             .then(r => r.json())
             .then(d => {
                 if (d.success) {
-                    closeLoginModal();
-                    checkAuth();
-                    notify('✅ Logged in!', 'success');
+                    closeModal('login-modal');
+                    checkLogin();
                 } else {
-                    document.getElementById('loginError').innerHTML = `<div class="message error">❌ ${d.message}</div>`;
+                    document.getElementById('login-error').innerHTML = `<div class="msg error">❌ ${d.message}</div>`;
                 }
-            })
-            .catch(e => {
-                document.getElementById('loginError').innerHTML = '<div class="message error">❌ Error</div>';
             });
         }
 
-        function submitRegister() {
-            const user = document.getElementById('regUser').value.trim();
-            const pass = document.getElementById('regPass').value.trim();
-            const conf = document.getElementById('regPassConfirm').value.trim();
-
-            if (!user || !pass || !conf) {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ All fields required</div>';
+        function doRegister() {
+            const u = document.getElementById('reg-user').value.trim();
+            const p = document.getElementById('reg-pass').value.trim();
+            const p2 = document.getElementById('reg-pass2').value.trim();
+            if (!u || !p || !p2) {
+                document.getElementById('register-error').innerHTML = '<div class="msg error">❌ All fields required</div>';
                 return;
             }
-            if (user.length < 3) {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Username 3+ chars</div>';
+            if (u.length < 3 || p.length < 6) {
+                document.getElementById('register-error').innerHTML = '<div class="msg error">❌ Username 3+, Password 6+</div>';
                 return;
             }
-            if (pass.length < 6) {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Password 6+ chars</div>';
+            if (p !== p2) {
+                document.getElementById('register-error').innerHTML = '<div class="msg error">❌ Passwords mismatch</div>';
                 return;
             }
-            if (pass !== conf) {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Passwords mismatch</div>';
-                return;
-            }
-
             fetch('game_database.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `action=register&username=${encodeURIComponent(user)}&password=${encodeURIComponent(pass)}`
+                body: `action=register&username=${encodeURIComponent(u)}&password=${encodeURIComponent(p)}`
             })
             .then(r => r.json())
             .then(d => {
                 if (d.success) {
-                    document.getElementById('registerError').innerHTML = '<div class="message success">✅ Registered! Login now.</div>';
+                    document.getElementById('register-error').innerHTML = '<div class="msg success">✅ Registered! Now login.</div>';
                     setTimeout(() => {
-                        closeRegisterModal();
-                        openLoginModal();
+                        closeModal('register-modal');
+                        showLoginModal();
                     }, 1500);
                 } else {
-                    document.getElementById('registerError').innerHTML = `<div class="message error">❌ ${d.message}</div>`;
+                    document.getElementById('register-error').innerHTML = `<div class="msg error">❌ ${d.message}</div>`;
                 }
-            })
-            .catch(e => {
-                document.getElementById('registerError').innerHTML = '<div class="message error">❌ Error</div>';
             });
         }
 
-        function logoutUser() {
-            fetch('game_database.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: 'action=logout'
-            })
-            .then(r => r.json())
-            .then(d => {
-                gameState.user = null;
-                updateUI();
-                notify('✅ Logged out', 'success');
-            });
+        function logout() {
+            fetch('game_database.php', { method: 'POST', body: 'action=logout' })
+                .then(r => r.json())
+                .then(d => { user = null; updateUI(); });
         }
 
         // GAME
-        function initGame() {
-            if (!gameState.user) return;
-            gameState.currentPassword = PASSWORDS[Math.floor(Math.random() * PASSWORDS.length)];
-            gameState.attempts = 3;
-            gameState.score = 0;
-            gameState.gameActive = true;
-            gameState.startTime = Date.now();
-            document.getElementById('passwordInput').disabled = false;
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('passwordInput').focus();
-            updateDisplay();
+        function startNewGame() {
+            if (!user) return;
+            currentPwd = PASSWORDS[Math.floor(Math.random() * PASSWORDS.length)];
+            attempts = 3;
+            score = 0;
+            gameRunning = true;
+            document.getElementById('pwd-input').disabled = false;
+            document.getElementById('pwd-input').value = '';
+            document.getElementById('pwd-input').focus();
+            updateStats();
             showHints();
-            document.getElementById('gameDisplay').innerHTML = `<p>> Ready for password input...</p>`;
+            document.getElementById('game-output').innerHTML = '<p class="info">> Game started! Guess the password...</p>';
         }
 
         function showHints() {
-            document.getElementById('hint1').textContent = '✓ ' + gameState.currentPassword.hints[0];
-            document.getElementById('hint2').textContent = '✓ ' + gameState.currentPassword.hints[1];
-            document.getElementById('hint3').textContent = '✓ ' + gameState.currentPassword.hints[2];
+            document.getElementById('hint1').textContent = '✓ ' + currentPwd.hints[0];
+            document.getElementById('hint2').textContent = '✓ ' + currentPwd.hints[1];
+            document.getElementById('hint3').textContent = '✓ ' + currentPwd.hints[2];
         }
 
-        function updateDisplay() {
-            document.getElementById('attemptsDisplay').textContent = gameState.attempts;
-            document.getElementById('scoreDisplay').textContent = gameState.score;
+        function updateStats() {
+            document.getElementById('attempts').textContent = attempts;
+            document.getElementById('score').textContent = score;
         }
 
-        function checkPassword() {
-            if (!gameState.gameActive) return;
-            const input = document.getElementById('passwordInput').value;
-            if (!input) { notify('⚠️ Enter password', 'error'); return; }
-            
-            const display = document.getElementById('gameDisplay');
-            
-            if (input === gameState.currentPassword.pwd) {
-                const time = Math.floor((Date.now() - gameState.startTime) / 1000);
-                gameState.score += (gameState.attempts * 50);
-                gameState.gameActive = false;
-                document.getElementById('passwordInput').disabled = true;
-                
-                display.innerHTML = `
+        function guessPassword() {
+            if (!gameRunning) return;
+            const input = document.getElementById('pwd-input').value;
+            if (!input) {
+                alert('Enter a password!');
+                return;
+            }
+
+            const out = document.getElementById('game-output');
+
+            if (input === currentPwd.pwd) {
+                const time = Math.floor((Date.now() - startTime) / 1000);
+                score += (attempts * 50);
+                gameRunning = false;
+                document.getElementById('pwd-input').disabled = true;
+
+                out.innerHTML = `
                     <p class="success">✅ CORRECT!</p>
                     <p class="success">> Password: ${input}</p>
                     <p class="info">> Time: ${time}s</p>
-                    <p class="success">> +${gameState.attempts * 50} points!</p>
+                    <p class="success">> +${attempts * 50} points!</p>
                 `;
 
                 fetch('game_database.php', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `action=save_score&score=${gameState.score}&password=${input}&attempts=${3-gameState.attempts}&time=${time}`
+                    body: `action=save_score&score=${score}&password=${input}&attempts=${3-attempts}&time=${time}`
                 })
                 .then(r => r.json())
                 .then(d => {
                     if (d.success) {
-                        notify('✅ Score saved!', 'success');
-                        loadUserStats();
+                        loadStats();
                         loadLeaderboard('all');
                     }
                 });
-                updateDisplay();
+                updateStats();
                 return;
             }
 
-            gameState.attempts--;
-            gameState.score = Math.max(0, gameState.score - 10);
-            updateDisplay();
+            attempts--;
+            score = Math.max(0, score - 10);
+            updateStats();
 
-            if (gameState.attempts > 0) {
-                display.innerHTML += `<p class="error">❌ Wrong! ${gameState.attempts} left</p>`;
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus();
+            if (attempts > 0) {
+                out.innerHTML += `<p class="error">❌ Wrong! ${attempts} attempts left</p>`;
+                document.getElementById('pwd-input').value = '';
+                document.getElementById('pwd-input').focus();
             } else {
-                gameState.gameActive = false;
-                document.getElementById('passwordInput').disabled = true;
-                display.innerHTML = `
-                    <p class="error">❌ FAILED</p>
-                    <p class="info">> Answer: ${gameState.currentPassword.pwd}</p>
+                gameRunning = false;
+                document.getElementById('pwd-input').disabled = true;
+                out.innerHTML = `
+                    <p class="error">❌ GAME OVER</p>
+                    <p class="info">> Answer: ${currentPwd.pwd}</p>
                 `;
             }
         }
 
-        function resetGame() {
-            if (!gameState.user) { notify('⚠️ Login required', 'error'); return; }
-            initGame();
-            notify('🔄 New game started!', 'success');
+        function newGame() {
+            if (!user) return;
+            startNewGame();
+        }
+
+        let startTime;
+        function startNewGame() {
+            if (!user) return;
+            currentPwd = PASSWORDS[Math.floor(Math.random() * PASSWORDS.length)];
+            attempts = 3;
+            score = 0;
+            gameRunning = true;
+            startTime = Date.now();
+            document.getElementById('pwd-input').disabled = false;
+            document.getElementById('pwd-input').value = '';
+            document.getElementById('pwd-input').focus();
+            updateStats();
+            showHints();
+            document.getElementById('game-output').innerHTML = '<p class="info">> Game started! Guess the password...</p>';
         }
 
         // STATS
-        function loadUserStats() {
-            if (!gameState.user) return;
+        function loadStats() {
+            if (!user) return;
             fetch('game_database.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `action=get_user_stats&user_id=${gameState.user.id}`
+                body: `action=get_user_stats&user_id=${user.id}`
             })
             .then(r => r.json())
             .then(s => {
                 if (!s) return;
                 let html = `
-                    <div class="stats-grid" style="grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px;">
-                        <div class="stat-box"><div class="stat-label">Played</div><div class="stat-value">${s.games_played || 0}</div></div>
-                        <div class="stat-box"><div class="stat-label">Total</div><div class="stat-value">${s.total_score || 0}</div></div>
-                        <div class="stat-box"><div class="stat-label">Best</div><div class="stat-value">${s.best_score || 0}</div></div>
-                        <div class="stat-box"><div class="stat-label">Avg</div><div class="stat-value">${s.average_score || 0}</div></div>
+                    <div class="stats">
+                        <div class="stat"><div class="stat-label">PLAYED</div><div class="stat-value">${s.games_played || 0}</div></div>
+                        <div class="stat"><div class="stat-label">TOTAL</div><div class="stat-value">${s.total_score || 0}</div></div>
+                        <div class="stat"><div class="stat-label">BEST</div><div class="stat-value">${s.best_score || 0}</div></div>
+                        <div class="stat"><div class="stat-label">AVG</div><div class="stat-value">${Math.round(s.average_score || 0)}</div></div>
                     </div>
                 `;
                 if (s.recent_games && s.recent_games.length > 0) {
-                    html += '<h3 style="color: #00d4ff; margin-top: 15px; margin-bottom: 10px; font-size: 0.95em;">Recent:</h3>';
-                    html += '<table class="leaderboard-table"><tr><th>Date</th><th>Score</th><th>Time</th></tr>';
+                    html += '<h4 style="color: #00d4ff; margin-top: 15px; margin-bottom: 10px;">Recent:</h4>';
+                    html += '<table><tr><th>Date</th><th>Score</th><th>Time</th></tr>';
                     s.recent_games.forEach(g => {
                         html += `<tr><td>${new Date(g.date).toLocaleDateString()}</td><td>${g.score}</td><td>${g.time_taken}s</td></tr>`;
                     });
                     html += '</table>';
                 }
-                document.getElementById('statsContent').innerHTML = html;
+                document.getElementById('stats-display').innerHTML = html;
             });
         }
 
-        function loadLeaderboard(p = 'all') {
-            document.getElementById('leaderboardContent').innerHTML = '<div class="loading">Loading...</div>';
+        function loadLeaderboard(p) {
+            document.getElementById('board-display').innerHTML = '<p class="info">Loading...</p>';
             fetch('game_database.php', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `action=get_leaderboard&period=${p}&limit=20`
             })
             .then(r => r.json())
             .then(d => {
                 if (!d.leaderboard || d.leaderboard.length === 0) {
-                    document.getElementById('leaderboardContent').innerHTML = '<div class="message info">No scores yet</div>';
+                    document.getElementById('board-display').innerHTML = '<p class="info">No scores yet</p>';
                     return;
                 }
-                let html = '<table class="leaderboard-table"><tr><th class="rank">#</th><th>Player</th><th>Score</th><th>Games</th><th>Best</th></tr>';
+                let html = '<table><tr><th class="rank">#</th><th>Player</th><th>Score</th><th>Games</th><th>Best</th></tr>';
                 d.leaderboard.forEach((p, i) => {
                     html += `<tr><td class="rank">${i+1}</td><td>${p.username}</td><td>${p.total_score}</td><td>${p.games_played}</td><td>${p.best_score}</td></tr>`;
                 });
                 html += '</table>';
-                document.getElementById('leaderboardContent').innerHTML = html;
+                document.getElementById('board-display').innerHTML = html;
             });
         }
 
-        function switchTab(t) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-            document.getElementById(t).classList.add('active');
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
             event.target.classList.add('active');
-            if (t === 'leaderboard') loadLeaderboard('all');
+            if (tab === 'leaderboard') loadLeaderboard('all');
         }
 
         // INIT
-        checkAuth();
+        checkLogin();
     </script>
 </body>
 </html>
