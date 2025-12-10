@@ -22,6 +22,928 @@
             padding: 20px;
         }
 
+        .container {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .game-container {
+            background: rgba(13, 27, 42, 0.95);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            animation: glowBorder 3s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes glowBorder {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(0, 212, 255, 0.6), inset 0 0 30px rgba(0, 212, 255, 0.2);
+            }
+        }
+
+        .auth-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .auth-button {
+            padding: 8px 15px;
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 1px solid #00d4ff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .auth-button:hover {
+            background: rgba(0, 212, 255, 0.3);
+        }
+
+        .user-info {
+            color: #2ed573;
+            font-weight: bold;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(13, 27, 42, 0.95);
+            border: 2px solid #00d4ff;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            color: #00d4ff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00d4ff;
+            border-radius: 5px;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2ed573;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .modal-buttons .submit {
+            background: linear-gradient(135deg, #00d4ff, #2ed573);
+            color: #0d1b2a;
+        }
+
+        .modal-buttons .cancel {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 1px solid #00d4ff;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: transparent;
+            color: #b0b0b0;
+            border: none;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            color: #00d4ff;
+            border-bottom-color: #00d4ff;
+        }
+
+        .tab:hover {
+            color: #00d4ff;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .terminal-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #00d4ff;
+            padding-bottom: 20px;
+        }
+
+        .terminal-header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+        }
+
+        .game-display {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00d4ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            min-height: 150px;
+        }
+
+        .terminal-text {
+            margin-bottom: 15px;
+            animation: typewriter 0.5s steps(40, end);
+        }
+
+        @keyframes typewriter {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hints-section {
+            background: rgba(46, 213, 115, 0.1);
+            border-left: 4px solid #2ed573;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .hint-item {
+            color: #b0b0b0;
+            font-size: 0.85em;
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .hint-item:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #2ed573;
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        .input-section label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .input-section input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #00d4ff;
+            border-radius: 5px;
+            color: #00d4ff;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        .input-section input:focus {
+            outline: none;
+            border-color: #2ed573;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            background: linear-gradient(135deg, #00d4ff, #2ed573);
+            color: #0d1b2a;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s ease;
+        }
+
+        button:hover:not(:disabled) {
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .reset-btn {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            border: 1px solid #00d4ff;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #00d4ff;
+        }
+
+        .stat-box {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid #00d4ff;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #b0b0b0;
+            font-size: 0.85em;
+            margin-bottom: 5px;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #2ed573;
+        }
+
+        .game-won {
+            text-align: center;
+            padding: 20px;
+            background: rgba(46, 213, 115, 0.1);
+            border: 2px solid #2ed573;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(46, 213, 115, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(46, 213, 115, 0.6);
+            }
+        }
+
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .leaderboard-table th,
+        .leaderboard-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #00d4ff;
+            color: #b0b0b0;
+        }
+
+        .leaderboard-table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: bold;
+        }
+
+        .leaderboard-table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .rank {
+            color: #2ed573;
+            font-weight: bold;
+            width: 50px;
+        }
+
+        .error-message {
+            color: #ff4757;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(255, 71, 87, 0.1);
+            border-left: 4px solid #ff4757;
+            border-radius: 3px;
+        }
+
+        .success-message {
+            color: #2ed573;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(46, 213, 115, 0.1);
+            border-left: 4px solid #2ed573;
+            border-radius: 3px;
+        }
+
+        .login-required {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 71, 87, 0.1);
+            border: 2px solid #ff4757;
+            border-radius: 5px;
+            color: #ff4757;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 25px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .leaderboard-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Authentication Section -->
+        <div class="game-container">
+            <div class="auth-section">
+                <div id="authButtons">
+                    <button class="auth-button" onclick="showLoginModal()">🔓 Login</button>
+                    <button class="auth-button" onclick="showRegisterModal()">📝 Register</button>
+                </div>
+                <div id="userDisplay" style="display: none;">
+                    <span class="user-info" id="userGreeting"></span>
+                    <button class="auth-button" onclick="logoutUser()">🚪 Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Game Container -->
+        <div class="game-container">
+            <div class="terminal-header">
+                <h1>🎮 CYBER HACKER</h1>
+                <p>> System Access Terminal v2.0</p>
+            </div>
+
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('game')">🎮 Game</button>
+                <button class="tab" onclick="switchTab('stats')">📊 My Stats</button>
+                <button class="tab" onclick="switchTab('leaderboard')">🏆 Leaderboard</button>
+            </div>
+
+            <!-- Game Tab -->
+            <div id="game" class="tab-content active">
+                <div id="gameContent">
+                    <div class="game-display" id="gameDisplay">
+                        <div class="terminal-text">
+                            > Initializing secure access point...
+                        </div>
+                        <div class="terminal-text">
+                            > Connection established ✓
+                        </div>
+                        <div class="terminal-text" style="color: #2ed573;">
+                            > AUTHORIZATION REQUIRED
+                        </div>
+                    </div>
+
+                    <div class="hints-section">
+                        <h3>💡 Hints:</h3>
+                        <div class="hint-item" id="hint1">Hint will appear here</div>
+                        <div class="hint-item" id="hint2">Hint will appear here</div>
+                        <div class="hint-item" id="hint3">Hint will appear here</div>
+                    </div>
+
+                    <div class="input-section">
+                        <label for="passwordInput">> Enter Password:</label>
+                        <input 
+                            type="password" 
+                            id="passwordInput" 
+                            placeholder="Type password here..." 
+                            onkeypress="handleEnter(event)"
+                        >
+                    </div>
+
+                    <div class="button-group">
+                        <button onclick="checkPassword()">🔓 Guess Password</button>
+                        <button class="reset-btn" onclick="resetGame()">🔄 Reset Game</button>
+                    </div>
+
+                    <div class="stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Attempts Left</div>
+                            <div class="stat-value" id="attemptsDisplay">3</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Score</div>
+                            <div class="stat-value" id="scoreDisplay">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="loginPrompt" style="display: none;" class="login-required">
+                    <p>Please <strong>login or register</strong> to play and save your scores!</p>
+                </div>
+            </div>
+
+            <!-- Stats Tab -->
+            <div id="stats" class="tab-content">
+                <div id="statsContent">
+                    <div class="login-required">
+                        <p>Login to view your statistics</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard Tab -->
+            <div id="leaderboard" class="tab-content">
+                <div style="margin-bottom: 15px;">
+                    <button class="auth-button" onclick="getLeaderboard('all')" style="width: auto;">All Time</button>
+                    <button class="auth-button" onclick="getLeaderboard('month')" style="width: auto;">This Month</button>
+                    <button class="auth-button" onclick="getLeaderboard('week')" style="width: auto;">This Week</button>
+                    <button class="auth-button" onclick="getLeaderboard('today')" style="width: auto;">Today</button>
+                </div>
+                <div id="leaderboardContent">
+                    <p>Loading leaderboard...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">> LOGIN</div>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" id="loginUsername" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" id="loginPassword" placeholder="Enter password">
+            </div>
+            <div id="loginError"></div>
+            <div class="modal-buttons">
+                <button class="submit" onclick="submitLogin()">Login</button>
+                <button class="cancel" onclick="closeLoginModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">> REGISTER</div>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" id="registerUsername" placeholder="Enter username (3+ chars)">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" id="registerPassword" placeholder="Enter password (6+ chars)">
+            </div>
+            <div class="form-group">
+                <label>Confirm Password:</label>
+                <input type="password" id="registerPasswordConfirm" placeholder="Confirm password">
+            </div>
+            <div id="registerError"></div>
+            <div class="modal-buttons">
+                <button class="submit" onclick="submitRegister()">Register</button>
+                <button class="cancel" onclick="closeRegisterModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game Data
+        const passwords = [
+            {
+                password: "CyberSecurity2024",
+                hints: ["It contains the word 'Cyber'", "Length: 18 characters", "Contains uppercase letters and numbers"]
+            },
+            {
+                password: "H4cker@Defense",
+                hints: ["Starts with 'H'", "Contains special character @", "Length: 14 characters"]
+            },
+            {
+                password: "Encryption123Secure",
+                hints: ["Contains the word 'Encryption'", "Length: 19 characters", "Ends with 'Secure'"]
+            },
+            {
+                password: "Malware0Detected",
+                hints: ["Contains the word 'Malware'", "Has a number 0 in it", "Length: 16 characters"]
+            },
+            {
+                password: "NetworkVPN#Safe",
+                hints: ["Related to network security", "Contains # symbol", "Length: 15 characters"]
+            }
+        ];
+
+        let currentPassword = {};
+        let attempts = 3;
+        let score = 0;
+        let gameActive = false;
+        let gameStartTime = 0;
+        let currentUser = null;
+
+        // Check login status
+        function checkLoginStatus() {
+            fetch('game_database.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'action=current_user'
+            })
+            .then(r => r.json())
+            .then(data => {
+                currentUser = data.user;
+                updateAuthUI();
+            });
+        }
+
+        // Update auth UI
+        function updateAuthUI() {
+            if (currentUser) {
+                document.getElementById('authButtons').style.display = 'none';
+                document.getElementById('userDisplay').style.display = 'flex';
+                document.getElementById('userGreeting').textContent = `Welcome, ${currentUser.username}! 👋`;
+                document.getElementById('loginPrompt').style.display = 'none';
+                document.getElementById('gameContent').style.display = 'block';
+                initGame();
+                loadUserStats();
+            } else {
+                document.getElementById('authButtons').style.display = 'flex';
+                document.getElementById('userDisplay').style.display = 'none';
+                document.getElementById('loginPrompt').style.display = 'block';
+                document.getElementById('gameContent').style.display = 'none';
+            }
+        }
+
+        // Login/Register Functions
+        function showLoginModal() { document.getElementById('loginModal').classList.add('active'); }
+        function closeLoginModal() { document.getElementById('loginModal').classList.remove('active'); }
+        function showRegisterModal() { document.getElementById('registerModal').classList.add('active'); }
+        function closeRegisterModal() { document.getElementById('registerModal').classList.remove('active'); }
+
+        function submitLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            fetch('game_database.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    closeLoginModal();
+                    checkLoginStatus();
+                } else {
+                    document.getElementById('loginError').innerHTML = `<div class="error-message">${data.message}</div>`;
+                }
+            });
+        }
+
+        function submitRegister() {
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirm = document.getElementById('registerPasswordConfirm').value;
+            
+            if (password !== confirm) {
+                document.getElementById('registerError').innerHTML = '<div class="error-message">Passwords do not match</div>';
+                return;
+            }
+            
+            fetch('game_database.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `action=register&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('registerError').innerHTML = '<div class="success-message">Registration successful! Please login.</div>';
+                    setTimeout(() => {
+                        closeRegisterModal();
+                        showLoginModal();
+                    }, 1500);
+                } else {
+                    document.getElementById('registerError').innerHTML = `<div class="error-message">${data.message}</div>`;
+                }
+            });
+        }
+
+        function logoutUser() {
+            fetch('game_database.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'action=logout'
+            })
+            .then(r => r.json())
+            .then(data => {
+                currentUser = null;
+                updateAuthUI();
+            });
+        }
+
+        // Game Functions
+        function initGame() {
+            if (!currentUser) return;
+            currentPassword = passwords[Math.floor(Math.random() * passwords.length)];
+            attempts = 3;
+            score = 0;
+            gameActive = true;
+            gameStartTime = Date.now();
+            document.getElementById('passwordInput').disabled = false;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+            updateDisplay();
+            displayHints();
+        }
+
+        function displayHints() {
+            document.getElementById('hint1').textContent = "✓ " + currentPassword.hints[0];
+            document.getElementById('hint2').textContent = "✓ " + currentPassword.hints[1];
+            document.getElementById('hint3').textContent = "✓ " + currentPassword.hints[2];
+        }
+
+        function updateDisplay() {
+            document.getElementById('attemptsDisplay').textContent = attempts;
+            document.getElementById('scoreDisplay').textContent = score;
+        }
+
+        function checkPassword() {
+            if (!currentUser || !gameActive) return;
+
+            const input = document.getElementById('passwordInput').value;
+            const gameDisplay = document.getElementById('gameDisplay');
+
+            if (!input) {
+                showError('Please enter a password!');
+                return;
+            }
+
+            if (input === currentPassword.password) {
+                const timeTaken = Math.floor((Date.now() - gameStartTime) / 1000);
+                score += (attempts * 50);
+                gameActive = false;
+                document.getElementById('passwordInput').disabled = true;
+
+                // Save score
+                fetch('game_database.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `action=save_score&score=${score}&password=${input}&attempts=${3-attempts}&time=${timeTaken}`
+                })
+                .then(r => r.json())
+                .then(data => {
+                    loadUserStats();
+                    getLeaderboard('all');
+                });
+
+                gameDisplay.innerHTML = `
+                    <div class="game-won">
+                        <h2>✅ ACCESS GRANTED!</h2>
+                        <p>Password: <span style="color: #2ed573;">${input}</span></p>
+                        <p>Time: <span style="color: #2ed573;">${timeTaken}s</span></p>
+                        <p style="margin-top: 10px;">You earned <span style="color: #2ed573;">${score} points!</span></p>
+                    </div>
+                `;
+                updateDisplay();
+                return;
+            }
+
+            attempts--;
+            score = Math.max(0, score - 10);
+            updateDisplay();
+
+            if (attempts > 0) {
+                showError(`❌ Wrong password! ${attempts} attempt${attempts === 1 ? '' : 's'} remaining`);
+                document.getElementById('passwordInput').value = '';
+            } else {
+                gameActive = false;
+                document.getElementById('passwordInput').disabled = true;
+                gameDisplay.innerHTML = `
+                    <div style="text-align: center; padding: 20px; background: rgba(255, 71, 87, 0.1); border: 2px solid #ff4757; border-radius: 5px;">
+                        <h2 style="color: #ff4757;">❌ ACCESS DENIED</h2>
+                        <p>Correct password: <span style="color: #ff4757;">${currentPassword.password}</span></p>
+                    </div>
+                `;
+            }
+        }
+
+        function showError(message) {
+            const gameDisplay = document.getElementById('gameDisplay');
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'terminal-text';
+            errorDiv.style.color = '#ff4757';
+            errorDiv.textContent = '> ' + message;
+            gameDisplay.appendChild(errorDiv);
+        }
+
+        function resetGame() {
+            document.getElementById('gameDisplay').innerHTML = `
+                <div class="terminal-text">
+                    > Resetting system...
+                </div>
+                <div class="terminal-text">
+                    > Connection reestablished ✓
+                </div>
+            `;
+            initGame();
+        }
+
+        function handleEnter(event) {
+            if (event.key === 'Enter' && gameActive) {
+                checkPassword();
+            }
+        }
+
+        // Stats & Leaderboard
+        function loadUserStats() {
+            if (!currentUser) return;
+
+            fetch('game_database.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `action=get_user_stats&user_id=${currentUser.id}`
+            })
+            .then(r => r.json())
+            .then(stats => {
+                let html = `
+                    <div class="stats">
+                        <div class="stat-box">
+                            <div class="stat-label">Games Played</div>
+                            <div class="stat-value">${stats.games_played}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Total Score</div>
+                            <div class="stat-value">${stats.total_score}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Best Score</div>
+                            <div class="stat-value">${stats.best_score}</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label">Average Score</div>
+                            <div class="stat-value">${stats.average_score}</div>
+                        </div>
+                    </div>
+                `;
+
+                if (stats.recent_games.length > 0) {
+                    html += '<h3 style="margin-top: 20px; color: #00d4ff;">Recent Games:</h3>';
+                    html += '<table class="leaderboard-table">';
+                    html += '<tr><th>Date</th><th>Password</th><th>Score</th><th>Time</th></tr>';
+                    stats.recent_games.forEach(game => {
+                        html += `<tr>
+                            <td>${new Date(game.date).toLocaleString()}</td>
+                            <td>${game.password}</td>
+                            <td>${game.score}</td>
+                            <td>${game.time_taken}s</td>
+                        </tr>`;
+                    });
+                    html += '</table>';
+                }
+
+                document.getElementById('statsContent').innerHTML = html;
+            });
+        }
+
+        function getLeaderboard(period = 'all') {
+            fetch('game_database.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `action=get_leaderboard&period=${period}&limit=20`
+            })
+            .then(r => r.json())
+            .then(data => {
+                let html = '<table class="leaderboard-table">';
+                html += '<tr><th class="rank">#</th><th>Player</th><th>Total Score</th><th>Games</th><th>Best</th><th>Avg</th></tr>';
+                
+                data.leaderboard.forEach((player, index) => {
+                    html += `<tr>
+                        <td class="rank">${index + 1}</td>
+                        <td>${player.username}</td>
+                        <td>${player.total_score}</td>
+                        <td>${player.games_played}</td>
+                        <td>${player.best_score}</td>
+                        <td>${player.average_score}</td>
+                    </tr>`;
+                });
+                html += '</table>';
+                document.getElementById('leaderboardContent').innerHTML = html;
+            });
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            event.target.classList.add('active');
+
+            if (tab === 'leaderboard') {
+                getLeaderboard('all');
+            }
+        }
+
+        // Initialize
+        checkLoginStatus();
+    </script>
+</body>
+</html>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1e3a5f 50%, #2a5c8f 100%);
+            font-family: 'Courier New', monospace;
+            color: #00d4ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
         .game-container {
             background: rgba(13, 27, 42, 0.95);
             border: 2px solid #00d4ff;
