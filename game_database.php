@@ -3,27 +3,60 @@
 session_start();
 
 // Database configuration
-$db_file = 'game_scores.json';
+$db_file = __DIR__ . '/game_scores.json';
+$db_dir = __DIR__;
+
+// Ensure directory is writable
+if (!is_writable($db_dir)) {
+    chmod($db_dir, 0755);
+}
 
 // Initialize database if it doesn't exist
 if (!file_exists($db_file)) {
-    file_put_contents($db_file, json_encode([
+    $initial_data = [
         'users' => [],
         'scores' => []
-    ]));
+    ];
+    file_put_contents($db_file, json_encode($initial_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    chmod($db_file, 0666);
 }
 
-// Read database
+// Read database with error handling
 function readDatabase() {
     global $db_file;
-    $data = file_get_contents($db_file);
-    return json_decode($data, true);
+    try {
+        if (!file_exists($db_file)) {
+            return ['users' => [], 'scores' => []];
+        }
+        $data = file_get_contents($db_file);
+        $decoded = json_decode($data, true);
+        if ($decoded === null) {
+            return ['users' => [], 'scores' => []];
+        }
+        return $decoded;
+    } catch (Exception $e) {
+        return ['users' => [], 'scores' => []];
+    }
 }
 
-// Write database
+// Write database with error handling
 function writeDatabase($data) {
     global $db_file;
-    file_put_contents($db_file, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    try {
+        $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        if ($json === false) {
+            throw new Exception('JSON encoding failed');
+        }
+        $result = file_put_contents($db_file, $json, LOCK_EX);
+        if ($result === false) {
+            throw new Exception('Failed to write to database');
+        }
+        @chmod($db_file, 0666);
+        return true;
+    } catch (Exception $e) {
+        error_log('Database write error: ' . $e->getMessage());
+        return false;
+    }
 }
 
 // Register user
