@@ -139,6 +139,7 @@ const portfolioData = {
 // Initialize portfolio with personal data
 function initializePortfolio() {
   updatePersonalInfo();
+  setupScrollAnimations();
   console.log("✓ Portfolio initialized with data");
 }
 
@@ -181,8 +182,62 @@ function smoothScrollToSection(sectionId) {
 function copyEmailToClipboard() {
   const email = portfolioData.personal.email;
   navigator.clipboard.writeText(email).then(() => {
-    alert(`📧 Email copied: ${email}`);
+    showToast(`📧 Email copied: ${email}`);
   });
+}
+
+// ============================================
+// SCROLL ANIMATIONS & VIBE CODING
+// ============================================
+
+// Intersection Observer for scroll animations
+function setupScrollAnimations() {
+  const options = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, options);
+
+  // Observe all elements with animation classes
+  document.querySelectorAll('section, .skill-card, .project-card, .cert-item').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// Toast notification system
+function showToast(message, duration = 3000) {
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(0, 212, 255, 0.5);
+    color: #00d4ff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    z-index: 9999;
+    animation: slideInLeft 0.4s ease forwards;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  `;
+  
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideInLeft 0.4s ease forwards reverse';
+    setTimeout(() => toast.remove(), 400);
+  }, duration);
 }
 
 // Get total projects count
@@ -269,6 +324,7 @@ function setupEventListeners() {
     link.addEventListener("click", (e) => {
       const sectionId = link.getAttribute("href").substring(1);
       trackSectionView(sectionId);
+      smoothScrollToSection(sectionId);
     });
   });
 
@@ -279,10 +335,25 @@ function setupEventListeners() {
       e.preventDefault();
       const formData = new FormData(contactForm);
       console.log(`📨 Form submitted from: ${formData.get("email")}`);
-      alert(`Thank you for reaching out! We'll get back to you soon.`);
-      contactForm.reset();
+      showToast(`✅ Message sent! We'll get back to you soon.`);
+      setTimeout(() => contactForm.reset(), 500);
     });
   }
+
+  // Add ripple effect to buttons
+  document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const ripple = button.querySelector('::before');
+      if (ripple) {
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        ripple.style.left = x + 'px';
+        ripple.style.top = y + 'px';
+      }
+    });
+  });
 }
 
 // ============================================
