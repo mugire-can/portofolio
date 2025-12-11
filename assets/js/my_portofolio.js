@@ -382,46 +382,39 @@ displayPortfolioSummary();
 // ============================================
 
 function loadGameStatsToPortfolio() {
-    const scores = getGameScores();
-    if (scores.length === 0) {
-        document.getElementById('portfolio-leaderboard').innerHTML = '<p style="color: #b0b0b0; text-align: center; padding: 20px;">No game scores yet. <a href="cyber_hacker_game.html" target="_blank" style="color: #00d4ff; text-decoration: underline;">Play the game!</a></p>';
-        return;
-    }
+    const leaderboardDiv = document.getElementById('portfolio-leaderboard');
+    if (!leaderboardDiv) return;
+    
+    leaderboardDiv.innerHTML = '<p style="color: #b0b0b0; text-align: center; padding: 20px;">🔄 Loading leaderboard...</p>';
 
-    // Group scores by player
-    const grouped = {};
-    scores.forEach(s => {
-        if (!grouped[s.username]) {
-            grouped[s.username] = { total: 0, games: 0, best: 0 };
+    // Fetch from PHP backend
+    const formData = new FormData();
+    formData.append('action', 'get_leaderboard');
+    formData.append('limit', 20);
+
+    fetch('game_database.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.leaderboard || data.leaderboard.length === 0) {
+            leaderboardDiv.innerHTML = '<p style="color: #b0b0b0; text-align: center; padding: 20px;">No game scores yet. <a href="cyber_hacker_game.html" target="_blank" style="color: #00d4ff; text-decoration: underline;">Play the game!</a></p>';
+            return;
         }
-        grouped[s.username].total += s.score;
-        grouped[s.username].games++;
-        grouped[s.username].best = Math.max(grouped[s.username].best, s.score);
+
+        // Build table
+        let html = '<table class="leaderboard-table"><tr><th class="rank">#</th><th>Player</th><th class="score">Total Score</th><th>Games</th><th>Best</th></tr>';
+        data.leaderboard.forEach((p, i) => {
+            html += `<tr><td class="rank">${i+1}</td><td>${p.username}</td><td class="score">${p.total_score}</td><td>${p.games_played}</td><td>${p.best_score}</td></tr>`;
+        });
+        html += '</table>';
+        leaderboardDiv.innerHTML = html;
+    })
+    .catch(error => {
+        console.error('Error loading leaderboard:', error);
+        leaderboardDiv.innerHTML = '<p style="color: #ff4757; text-align: center; padding: 20px;">⚠️ Error loading leaderboard</p>';
     });
-
-    // Sort and get top 20
-    const board = Object.entries(grouped)
-        .map(([name, stats]) => ({ name, ...stats }))
-        .sort((a, b) => b.total - a.total)
-        .slice(0, 20);
-
-    // Build table
-    let html = '<table class="leaderboard-table"><tr><th class="rank">#</th><th>Player</th><th class="score">Total Score</th><th>Games</th><th>Best</th></tr>';
-    board.forEach((p, i) => {
-        html += `<tr><td class="rank">${i+1}</td><td>${p.name}</td><td class="score">${p.total}</td><td>${p.games}</td><td>${p.best}</td></tr>`;
-    });
-    html += '</table>';
-    document.getElementById('portfolio-leaderboard').innerHTML = html;
-}
-
-// Get game scores from localStorage (same as game)
-function getGameScores() {
-    try {
-        const scores = localStorage.getItem('gameScores');
-        return scores ? JSON.parse(scores) : [];
-    } catch {
-        return [];
-    }
 }
 
 // Load stats on portfolio page load
