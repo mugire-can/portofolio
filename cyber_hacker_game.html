@@ -185,7 +185,7 @@
             </div>
 
             <!-- STATS PANEL -->
-            <div class="panel">
+            <div id="stats-panel" class="panel hidden">
                 <h2>📊 STATS</h2>
                 <div class="tabs">
                     <button class="tab-btn active" onclick="switchTab('my-stats')">📈 MY STATS</button>
@@ -193,11 +193,11 @@
                 </div>
                 
                 <div id="my-stats" class="tab-content active">
-                    <div id="stats-display" class="msg info">Login to see your stats</div>
+                    <div id="stats-display" class="msg info">ℹ️ Login to see your stats</div>
                 </div>
 
                 <div id="leaderboard" class="tab-content">
-                    <div id="board-display" class="msg info">No scores yet</div>
+                    <div id="board-display" class="msg info">ℹ️ No scores yet</div>
                 </div>
             </div>
         </div>
@@ -314,6 +314,7 @@
                 document.getElementById('user-info').classList.remove('hidden');
                 document.getElementById('username-display').textContent = `👤 ${currentUser.username}`;
                 document.getElementById('game-area').classList.remove('hidden');
+                document.getElementById('stats-panel').classList.remove('hidden');
                 document.getElementById('login-prompt').classList.add('hidden');
                 startNewGame();
                 setTimeout(() => {
@@ -324,6 +325,7 @@
                 document.getElementById('auth-buttons').classList.remove('hidden');
                 document.getElementById('user-info').classList.add('hidden');
                 document.getElementById('game-area').classList.add('hidden');
+                document.getElementById('stats-panel').classList.add('hidden');
                 document.getElementById('login-prompt').classList.remove('hidden');
             }
         }
@@ -555,12 +557,20 @@
         }
 
         function switchTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
+            // Hide all tabs
+            document.getElementById('my-stats').classList.remove('active');
+            document.getElementById('leaderboard').classList.remove('active');
+            
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
             document.getElementById(tab).classList.add('active');
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
+            
+            // Activate button
+            event.target.classList.add('active');
+            
+            // Load content
             if (tab === 'my-stats') {
                 loadStats();
             } else if (tab === 'leaderboard') {
