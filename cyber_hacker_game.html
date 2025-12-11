@@ -316,8 +316,10 @@
                 document.getElementById('game-area').classList.remove('hidden');
                 document.getElementById('login-prompt').classList.add('hidden');
                 startNewGame();
-                loadStats();
-                loadLeaderboard();
+                setTimeout(() => {
+                    loadStats();
+                    loadLeaderboard();
+                }, 100);
             } else {
                 document.getElementById('auth-buttons').classList.remove('hidden');
                 document.getElementById('user-info').classList.add('hidden');
@@ -492,7 +494,7 @@
             const scores = getScores().filter(s => s.username === currentUser.username);
             
             if (scores.length === 0) {
-                document.getElementById('stats-display').innerHTML = '<div class="msg info">No games played yet</div>';
+                document.getElementById('stats-display').innerHTML = '<div class="msg info">ℹ️ No games played yet. Play a game to see stats!</div>';
                 return;
             }
 
@@ -510,11 +512,11 @@
             `;
             
             if (scores.length > 0) {
-                html += '<h4 style="color: #00d4ff; margin-top: 15px; margin-bottom: 10px;">Recent:</h4>';
+                html += '<h4 style="color: #00d4ff; margin-top: 15px; margin-bottom: 10px;">📜 Recent Games:</h4>';
                 html += '<table><tr><th>Date</th><th>Score</th><th>Time</th></tr>';
                 scores.slice(-5).reverse().forEach(g => {
                     const date = new Date(g.date).toLocaleDateString();
-                    html += `<tr><td>${date}</td><td>${g.score}</td><td>${g.time}s</td></tr>`;
+                    html += `<tr><td>${date}</td><td style="color: #2ed573;">${g.score}</td><td>${g.time}s</td></tr>`;
                 });
                 html += '</table>';
             }
@@ -524,7 +526,7 @@
         function loadLeaderboard() {
             const scores = getScores();
             if (scores.length === 0) {
-                document.getElementById('board-display').innerHTML = '<div class="msg info">No scores yet</div>';
+                document.getElementById('board-display').innerHTML = '<div class="msg info">ℹ️ No scores yet. Be the first to play!</div>';
                 return;
             }
 
@@ -545,7 +547,8 @@
 
             let html = '<table><tr><th class="rank">#</th><th>Player</th><th>Score</th><th>Games</th><th>Best</th></tr>';
             board.forEach((p, i) => {
-                html += `<tr><td class="rank">${i+1}</td><td>${p.name}</td><td>${p.total}</td><td>${p.games}</td><td>${p.best}</td></tr>`;
+                const isCurrentUser = p.name === currentUser?.username ? ' style="background: rgba(0, 212, 255, 0.2); color: #00d4ff;"' : '';
+                html += `<tr${isCurrentUser}><td class="rank">${i+1}</td><td>${p.name}</td><td style="color: #2ed573;">${p.total}</td><td>${p.games}</td><td>${p.best}</td></tr>`;
             });
             html += '</table>';
             document.getElementById('board-display').innerHTML = html;
@@ -555,9 +558,14 @@
             document.querySelectorAll('.tab-content').forEach(e => e.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
             document.getElementById(tab).classList.add('active');
-            event.target.classList.add('active');
-            if (tab === 'my-stats') loadStats();
-            if (tab === 'leaderboard') loadLeaderboard();
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+            if (tab === 'my-stats') {
+                loadStats();
+            } else if (tab === 'leaderboard') {
+                loadLeaderboard();
+            }
         }
 
         // INIT
