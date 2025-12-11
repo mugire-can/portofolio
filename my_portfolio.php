@@ -276,6 +276,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </section>
 
+    <!-- Game Stats Section -->
+    <section id="game-stats">
+        <h2>🎮 Cyber Hacker Game - Top 20 Players & Stats</h2>
+        <p style="color: #b0b0b0; margin-bottom: 20px;">Test your cybersecurity skills! Play the interactive password-guessing game and compete with others. <a href="cyber_hacker_game.html" target="_blank" style="color: #00d4ff; text-decoration: none; font-weight: bold;">🎮 Play Game →</a></p>
+        
+        <div class="game-stats-container">
+            <!-- Login Panel -->
+            <div class="stats-panel">
+                <h3>🔐 Access Game Stats</h3>
+                <p style="color: #b0b0b0; margin-bottom: 15px;">Login or Register to play the game and see your stats!</p>
+                <div class="game-action-buttons">
+                    <button class="game-btn" onclick="window.open('cyber_hacker_game.html', '_blank')">🎮 Play Game</button>
+                    <button class="game-btn secondary" onclick="loadGameStatsToPortfolio()">🔄 Refresh Stats</button>
+                </div>
+            </div>
+
+            <!-- Leaderboard Panel -->
+            <div class="stats-panel">
+                <h3>🏆 Leaderboard</h3>
+                <div id="portfolio-leaderboard" style="color: #b0b0b0; text-align: center; padding: 20px;">
+                    <p>Loading leaderboard...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact">
         <h2>📬 Get In Touch</h2>

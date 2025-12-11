@@ -629,6 +629,164 @@ ul li {
     animation: floatHover 2s ease-in-out infinite;
 }
 
+/* Game Stats Section */
+#game-stats {
+    margin: 60px 0;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, rgba(13, 27, 42, 0.8) 0%, rgba(30, 58, 95, 0.8) 50%, rgba(42, 92, 143, 0.8) 100%);
+    border: 2px solid #00d4ff;
+    border-radius: 15px;
+    animation: fadeInUp 0.8s ease;
+}
+
+#game-stats h2 {
+    text-align: center;
+    color: #00d4ff;
+    margin-bottom: 10px;
+    font-size: 1.8em;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+#game-stats > p {
+    text-align: center;
+    color: #b0b0b0;
+    margin-bottom: 30px !important;
+}
+
+#game-stats > p a {
+    color: #00d4ff;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+#game-stats > p a:hover {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+}
+
+.game-stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stats-panel {
+    background: rgba(13, 27, 42, 0.95);
+    border: 2px solid #00d4ff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+    animation: slideInLeft 0.6s ease;
+}
+
+.stats-panel h3 {
+    color: #00d4ff;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #00d4ff;
+    padding-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.game-action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.game-btn {
+    flex: 1;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #00d4ff, #2ed573);
+    color: #0d1b2a;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s;
+    min-width: 140px;
+    font-size: 0.95em;
+}
+
+.game-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+}
+
+.game-btn.secondary {
+    background: rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+    border: 1px solid #00d4ff;
+}
+
+.game-btn.secondary:hover {
+    background: rgba(0, 212, 255, 0.4);
+}
+
+#portfolio-leaderboard {
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #00d4ff;
+    font-size: 0.9em;
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+}
+
+.leaderboard-table th {
+    background: rgba(0, 212, 255, 0.1);
+    color: #2ed573;
+    font-weight: bold;
+}
+
+.leaderboard-table tr:hover {
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.leaderboard-table td.rank {
+    color: #2ed573;
+    font-weight: bold;
+    width: 30px;
+    text-align: center;
+}
+
+.leaderboard-table td.score {
+    color: #2ed573;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .game-stats-container {
+        grid-template-columns: 1fr;
+    }
+    
+    #game-stats h2 {
+        font-size: 1.4em;
+    }
+    
+    .game-action-buttons {
+        flex-direction: column;
+    }
+    
+    .game-btn {
+        width: 100%;
+    }
+}
+}
+
 .contact-form button:active {
     transform: translateY(0);
 }
