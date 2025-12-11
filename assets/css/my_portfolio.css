@@ -332,7 +332,7 @@ ul li {
 }
 
 .skill-card li {
-    color: #b0b0b0;
+    color: #d0d0d0;
     padding-left: 20px;
     position: relative;
 }
@@ -408,7 +408,7 @@ ul li {
 }
 
 .timeline-content .role-description {
-    color: #b0b0b0;
+    color: #d0d0d0;
     font-size: 0.95em;
     margin-bottom: 10px;
     line-height: 1.5;
@@ -420,7 +420,7 @@ ul li {
 }
 
 .achievements li {
-    color: #a0a0a0;
+    color: #c0c0c0;
     padding-left: 20px;
     position: relative;
     margin: 6px 0;
@@ -476,7 +476,7 @@ ul li {
 }
 
 .project-card p {
-    color: #b0b0b0;
+    color: #d0d0d0;
     margin-bottom: 15px;
 }
 
@@ -535,7 +535,7 @@ ul li {
 }
 
 .cert-item p {
-    color: #a0a0a0;
+    color: #c0c0c0;
     font-size: 0.95em;
 }
 
@@ -585,15 +585,15 @@ ul li {
     padding: 12px;
     border: 1px solid rgba(0, 212, 255, 0.3);
     border-radius: 6px;
-    background: rgba(13, 27, 42, 0.5);
-    color: #e0e0e0;
+    background: rgba(13, 27, 42, 0.8);
+    color: #f0f0f0;
     transition: all 0.3s ease;
     font-family: inherit;
 }
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-    color: #666;
+    color: #a0a0a0;
 }
 
 .contact-form textarea {
@@ -631,12 +631,13 @@ ul li {
 
 /* Game Stats Section */
 #game-stats {
-    margin: 60px 0;
+    margin: 60px auto;
     padding: 40px 20px;
     background: linear-gradient(135deg, rgba(13, 27, 42, 0.8) 0%, rgba(30, 58, 95, 0.8) 50%, rgba(42, 92, 143, 0.8) 100%);
     border: 2px solid #00d4ff;
     border-radius: 15px;
     animation: fadeInUp 0.8s ease;
+    max-width: 1000px;
 }
 
 #game-stats h2 {
