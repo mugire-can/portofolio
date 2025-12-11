@@ -556,6 +556,7 @@
             document.querySelectorAll('.tab-btn').forEach(e => e.classList.remove('active'));
             document.getElementById(tab).classList.add('active');
             event.target.classList.add('active');
+            if (tab === 'my-stats') loadStats();
             if (tab === 'leaderboard') loadLeaderboard();
         }
 
